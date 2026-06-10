@@ -21,13 +21,21 @@ retriever = ProductRetriever()
 
 @router.post("/chat")
 def chat(payload: ChatRequest, request: Request):
-    response = _build_chat_response(payload)
     if payload.stream or "text/event-stream" in request.headers.get("accept", ""):
-        return StreamingResponse(_sse_events(payload, response), media_type="text/event-stream")
+        return StreamingResponse(
+            _sse_events(payload),
+            media_type="text/event-stream",
+            headers={
+                "Cache-Control": "no-cache",
+                "Connection": "keep-alive",
+                "X-Accel-Buffering": "no",
+            },
+        )
+    response = _build_chat_response(payload)
     return response
 
 
-def _build_chat_response(request: ChatRequest) -> ChatResponse:
+def _build_chat_response(request: ChatRequest, use_llm: bool = True) -> ChatResponse:
     state = get_dialogue_state(request.session_id)
     intent = detect_intent(request.message)
     current_constraints = parse_constraints(request.message)
@@ -52,7 +60,7 @@ def _build_chat_response(request: ChatRequest) -> ChatResponse:
         if len(products) < 2:
             return ChatResponse(intent="clarify", answer="我需要至少两款已推荐商品才能对比。", clarifying_question="请先让我推荐几款商品。")
         products_with_reasons = attach_reasons(products[:2], request.message)
-        answer = generate_comparison_copy(request.message, products_with_reasons)
+        answer = generate_comparison_copy(request.message, products_with_reasons) if use_llm else None
         return build_comparison_response(products_with_reasons, answer=answer)
 
     products = retriever.search(request.message, constraints, top_k=3)
@@ -68,24 +76,29 @@ def _build_chat_response(request: ChatRequest) -> ChatResponse:
             suggested_actions=["放宽预算", "换个类目", "查看热门商品"],
         )
 
-    llm_answer, llm_reasons = generate_recommendation_copy(request.message, products_with_reasons)
+    llm_answer, llm_reasons = generate_recommendation_copy(request.message, products_with_reasons) if use_llm else (None, {})
     products_with_reasons = apply_llm_reasons(products_with_reasons, llm_reasons)
     answer = llm_answer or f"我从本地商品库中筛选出 {len(products_with_reasons)} 款更匹配的商品，推荐理由均基于商品数据。"
     return build_recommendation_response(answer, products_with_reasons)
 
 
-def _sse_events(request: ChatRequest, response: ChatResponse):
+def _sse_events(request: ChatRequest):
     try:
+        intent = detect_intent(request.message)
         yield _format_sse(
             "meta",
             {
                 "session_id": request.session_id,
-                "intent": response.intent,
+                "intent": intent,
                 "created_at": int(time.time()),
             },
         )
-        for chunk in _chunk_text(response.answer):
+
+        yield _format_sse("delta", {"text": "正在理解你的需求，并检索本地商品库...\n"})
+        response = _build_chat_response(request, use_llm=False)
+        for chunk in _chunk_text(response.answer, size=4):
             yield _format_sse("delta", {"text": chunk})
+            time.sleep(0.02)
         yield _format_sse("final", response.model_dump(mode="json"))
         yield _format_sse("done", {"ok": True})
     except Exception as exc:

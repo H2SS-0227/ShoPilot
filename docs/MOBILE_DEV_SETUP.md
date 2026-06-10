@@ -47,11 +47,24 @@ EXPO_PUBLIC_API_BASE_URL=http://你的Mac局域网IP:8000
 
 ## SwiftUI 原生 App
 
-新增原生工程位于 `ios/ShopPilotNative`，采用 Swift Package 形式组织：
+新增原生工程位于 `ios/ShopPilotNative`，现在同时提供 Swift Package 和标准 Xcode iOS App 工程。
 
 - `ShopPilotCore`：模型、SSE parser、URLSession API client、ChatViewModel。
 - `ShopPilotNativeApp`：SwiftUI 聊天页、商品卡片、详情 Sheet、对比 Sheet、购物车 Sheet、测评参考入口。
 - `ShopPilotCoreTests`：SSE parser 和 ViewModel 状态转移测试。
+- `ShopPilotNative.xcodeproj`：可直接用完整 Xcode 打开的 iOS App 工程，内置 `ShopPilotNative` app target 和 shared scheme。
+
+用 Xcode 打开：
+
+```bash
+open /Users/bytedance/Desktop/ShoPilot/ios/ShopPilotNative/ShopPilotNative.xcodeproj
+```
+
+如果机器安装了完整 Xcode 但当前仍指向 Command Line Tools，先切换：
+
+```bash
+sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+```
 
 当前机器验证命令：
 
@@ -61,7 +74,7 @@ swift build --disable-sandbox --target ShopPilotCore
 swift build --disable-sandbox --target ShopPilotNativeApp
 ```
 
-说明：当前 Command Line Tools 环境缺少可用 `XCTest` 模块，`swift test --disable-sandbox` 会在测试编译阶段报 `no such module XCTest`。源码 target 已通过 build；完整 iOS target build 和单测建议在完整 Xcode + iPhone SDK 环境中执行。
+说明：当前 Command Line Tools 环境缺少完整 Xcode / iPhone SDK，`xcodebuild` 无法在本机执行 iOS target build，`swift test --disable-sandbox` 也会在测试编译阶段报 `no such module XCTest`。源码 target 已通过 SwiftPM build；完整 iOS Simulator 运行建议在完整 Xcode 环境中执行。
 
 ## 联调检查
 

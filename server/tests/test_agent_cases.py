@@ -104,6 +104,28 @@ def test_chat_lip_gloss_only_returns_lip_gloss() -> None:
     assert all(product["sub_category"] == "唇釉" for product in body["products"])
 
 
+def test_chat_common_subcategories_stay_relevant() -> None:
+    client = TestClient(app)
+    cases = [
+        ("推荐一款酸奶", {"酸奶"}),
+        ("推荐功能饮料", {"功能饮料"}),
+        ("推荐户外裤", {"户外裤"}),
+        ("推荐一款篮球鞋", {"篮球鞋"}),
+        ("推荐一款平板电脑", {"平板电脑"}),
+        ("推荐坚果零食", {"坚果/零食"}),
+    ]
+
+    for message, expected_sub_categories in cases:
+        response = client.post(
+            "/api/chat",
+            json={"session_id": f"relevance-{message}", "message": message, "stream": False},
+        )
+        assert response.status_code == 200
+        products = response.json()["products"]
+        assert products, message
+        assert all(product["sub_category"] in expected_sub_categories for product in products), message
+
+
 def test_chat_add_then_view_cart() -> None:
     client = TestClient(app)
     session_id = "cart-view-session"

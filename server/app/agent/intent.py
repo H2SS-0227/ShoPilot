@@ -5,9 +5,13 @@ from app.schemas.intent import Constraints
 
 
 CATEGORY_KEYWORDS = [
-    "蓝牙耳机", "耳机", "手机", "洗面奶", "洁面", "精华", "防晒", "跑鞋", "运动鞋",
-    "唇釉", "蜜粉", "眼霜", "化妆水", "卸妆", "面霜",
-    "T恤", "短袖", "咖啡", "零食", "键盘", "平板", "电脑", "护肤", "美妆",
+    "笔记本电脑", "真无线耳机", "平板电脑", "短袖T恤", "速干T恤", "运动长裤",
+    "运动短裤", "智能手机", "功能饮料", "坚果/零食", "碳酸饮料", "方便食品",
+    "蓝牙耳机", "洗面奶", "化妆水", "粉底液", "户外裤", "瑜伽裤", "徒步鞋",
+    "篮球鞋", "跑步鞋", "调味品", "防晒", "精华", "面霜", "眼霜", "蜜粉",
+    "卸妆", "洁面", "眉笔", "唇釉", "面膜", "咖啡", "酸奶", "牛奶", "茶饮",
+    "卫衣", "背包", "帽子", "耳机", "手机", "平板", "电脑", "跑鞋", "运动鞋",
+    "T恤", "短袖", "零食", "饮料", "护肤", "美妆",
 ]
 
 PREFERENCE_KEYWORDS = [
@@ -50,7 +54,7 @@ def parse_constraints(message: str) -> Constraints:
 
 
 def _extract_category(message: str) -> Optional[str]:
-    for keyword in CATEGORY_KEYWORDS:
+    for keyword in sorted(CATEGORY_KEYWORDS, key=len, reverse=True):
         if keyword.lower() in message.lower():
             return keyword
     return None

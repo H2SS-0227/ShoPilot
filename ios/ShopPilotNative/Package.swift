@@ -16,7 +16,8 @@ let package = Package(
         .target(name: "ShopPilotCore"),
         .executableTarget(
             name: "ShopPilotNativeApp",
-            dependencies: ["ShopPilotCore"]
+            dependencies: ["ShopPilotCore"],
+            exclude: ["Info.plist"]
         ),
         .testTarget(
             name: "ShopPilotCoreTests",

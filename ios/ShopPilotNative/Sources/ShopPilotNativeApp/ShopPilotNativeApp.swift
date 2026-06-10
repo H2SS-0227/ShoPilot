@@ -1,5 +1,8 @@
-import ShopPilotCore
 import SwiftUI
+
+#if canImport(ShopPilotCore)
+import ShopPilotCore
+#endif
 
 @main
 struct ShopPilotNativeApp: App {

@@ -62,12 +62,25 @@ export function ChatScreen() {
         text,
         "demo-session",
         {
+          onMeta: () => {
+            setMessages((prev) =>
+              prev.map((message) =>
+                message.id === assistantMessageId ? { ...message, text: "正在理解你的需求，并检索本地商品库...", streaming: true } : message,
+              ),
+            );
+          },
           onDelta: (chunk) => {
             receivedDelta = true;
             setMessages((prev) =>
               prev.map((message) =>
                 message.id === assistantMessageId
-                  ? { ...message, text: message.text === "正在理解需求并检索商品库..." ? chunk : `${message.text}${chunk}` }
+                  ? {
+                      ...message,
+                      text:
+                        message.text === "正在理解需求并检索商品库..." || message.text === "正在理解你的需求，并检索本地商品库..."
+                          ? chunk
+                          : `${message.text}${chunk}`,
+                    }
                   : message,
               ),
             );
