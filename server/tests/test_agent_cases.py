@@ -91,6 +91,19 @@ def test_chat_excludes_too_sweet_coffee() -> None:
     assert "甜味" not in product_text
 
 
+def test_chat_lip_gloss_only_returns_lip_gloss() -> None:
+    client = TestClient(app)
+    response = client.post(
+        "/api/chat",
+        json={"session_id": "lip-gloss-session", "message": "帮我找唇釉", "stream": False},
+    )
+
+    assert response.status_code == 200
+    body = response.json()
+    assert body["products"]
+    assert all(product["sub_category"] == "唇釉" for product in body["products"])
+
+
 def test_chat_add_then_view_cart() -> None:
     client = TestClient(app)
     session_id = "cart-view-session"
