@@ -95,7 +95,7 @@ def _sse_events(request: ChatRequest):
         )
 
         yield _format_sse("delta", {"text": "正在理解你的需求，并检索本地商品库...\n"})
-        response = _build_chat_response(request, use_llm=False)
+        response = _build_chat_response(request, use_llm=True)
         for chunk in _chunk_text(response.answer, size=4):
             yield _format_sse("delta", {"text": chunk})
             time.sleep(0.02)

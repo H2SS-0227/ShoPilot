@@ -28,6 +28,10 @@ private struct MockAPIClient: ShopPilotAPIClientProtocol {
         ChatResponse.fixture(answer: "JSON fallback", products: [])
     }
 
+    func streamEvents(_ message: String, sessionId: String) async throws -> [ChatStreamEvent] {
+        events
+    }
+
     func streamMessage(_ message: String, sessionId: String) -> AsyncThrowingStream<ChatStreamEvent, Error> {
         AsyncThrowingStream { continuation in
             Task {

@@ -2,6 +2,7 @@ import Foundation
 
 public protocol ShopPilotAPIClientProtocol {
     func sendMessage(_ message: String, sessionId: String) async throws -> ChatResponse
+    func streamEvents(_ message: String, sessionId: String) async throws -> [ChatStreamEvent]
     func streamMessage(_ message: String, sessionId: String) -> AsyncThrowingStream<ChatStreamEvent, Error>
 }
 
@@ -40,32 +41,18 @@ public final class ShopPilotAPIClient: ShopPilotAPIClientProtocol {
         var request = makeChatRequest()
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.httpBody = try encoder.encode(ChatRequest(sessionId: sessionId, message: message, stream: false))
-
         let (data, response) = try await session.data(for: request)
         try validate(response)
-        return try decoder.decode(ChatResponse.self, from: data)
+        let decoded = try decoder.decode(ChatResponse.self, from: data)
+        return decoded
     }
 
     public func streamMessage(_ message: String, sessionId: String = "ios-demo-session") -> AsyncThrowingStream<ChatStreamEvent, Error> {
         AsyncThrowingStream { continuation in
             let task = Task {
                 do {
-                    var request = makeChatRequest()
-                    request.setValue("text/event-stream", forHTTPHeaderField: "Accept")
-                    request.httpBody = try encoder.encode(ChatRequest(sessionId: sessionId, message: message, stream: true))
-
-                    let (bytes, response) = try await session.bytes(for: request)
-                    try validate(response)
-
-                    let parser = SSEParser()
-                    for try await line in bytes.lines {
-                        let events = try parser.append(line + "\n")
-                        for event in events {
-                            continuation.yield(event)
-                        }
-                    }
-
-                    for event in try parser.flush() {
+                    let events = try await self.streamEvents(message, sessionId: sessionId)
+                    for event in events {
                         continuation.yield(event)
                     }
                     continuation.finish()
@@ -76,6 +63,19 @@ public final class ShopPilotAPIClient: ShopPilotAPIClientProtocol {
 
             continuation.onTermination = { _ in task.cancel() }
         }
+    }
+
+    public func streamEvents(_ message: String, sessionId: String = "ios-demo-session") async throws -> [ChatStreamEvent] {
+        var request = makeChatRequest()
+        request.setValue("text/event-stream", forHTTPHeaderField: "Accept")
+        request.httpBody = try encoder.encode(ChatRequest(sessionId: sessionId, message: message, stream: true))
+        let (data, response) = try await session.data(for: request)
+        try validate(response)
+
+        let parser = SSEParser()
+        let payload = String(decoding: data, as: UTF8.self)
+        let events = try parser.append(payload) + parser.flush()
+        return events
     }
 
     private func makeChatRequest() -> URLRequest {

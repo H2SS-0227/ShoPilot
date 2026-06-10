@@ -28,7 +28,6 @@ public final class ChatViewModel: ObservableObject {
     public func send(_ text: String? = nil) {
         let prompt = (text ?? inputText).trimmingCharacters(in: .whitespacesAndNewlines)
         guard !prompt.isEmpty, !isStreaming else { return }
-
         inputText = ""
         errorMessage = nil
         isStreaming = true
@@ -40,13 +39,16 @@ public final class ChatViewModel: ObservableObject {
         streamTask = Task { [apiClient, sessionId] in
             do {
                 var hasDelta = false
-                for try await event in apiClient.streamMessage(prompt, sessionId: sessionId) {
+                let events = try await apiClient.streamEvents(prompt, sessionId: sessionId)
+                for event in events {
+                    try Task.checkCancellation()
                     switch event {
                     case .meta:
                         break
                     case .delta(let text):
                         hasDelta = true
                         appendDelta(text, to: assistantId)
+                        try await Task.sleep(nanoseconds: 45_000_000)
                     case .final(let response):
                         applyFinal(response, to: assistantId)
                     case .done:
@@ -60,7 +62,9 @@ public final class ChatViewModel: ObservableObject {
                     markNotStreaming(assistantId: assistantId)
                 }
             } catch is CancellationError {
-                cancelAssistantMessage(assistantId: assistantId)
+                if isStreaming {
+                    cancelAssistantMessage(assistantId: assistantId)
+                }
             } catch {
                 await fallbackToJSON(prompt: prompt, assistantId: assistantId)
             }
@@ -70,6 +74,10 @@ public final class ChatViewModel: ObservableObject {
     public func cancel() {
         streamTask?.cancel()
         streamTask = nil
+        if let index = messages.lastIndex(where: { $0.role == .assistant && $0.isStreaming }) {
+            messages[index].text = messages[index].text == "正在理解需求并检索商品库..." ? "已取消本次生成，可以修改需求后重新发送。" : messages[index].text + "\n\n已停止生成。"
+            messages[index].isStreaming = false
+        }
         isStreaming = false
     }
 

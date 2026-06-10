@@ -126,6 +126,20 @@ def test_chat_common_subcategories_stay_relevant() -> None:
         assert all(product["sub_category"] in expected_sub_categories for product in products), message
 
 
+def test_chat_unknown_category_returns_no_products() -> None:
+    client = TestClient(app)
+    for message in ["给我推荐一款香水", "推荐一个扫地机器人"]:
+        response = client.post(
+            "/api/chat",
+            json={"session_id": f"unknown-category-{message}", "message": message, "stream": False},
+        )
+        assert response.status_code == 200
+        body = response.json()
+        assert body["intent"] == "recommend"
+        assert body["products"] == []
+        assert "没有" in body["answer"] or "未找到" in body["answer"]
+
+
 def test_chat_add_then_view_cart() -> None:
     client = TestClient(app)
     session_id = "cart-view-session"

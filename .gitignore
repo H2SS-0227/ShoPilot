@@ -36,3 +36,9 @@ server/data/indexes/*
 # Swift Package Manager
 .build/
 .swiftpm/
+
+# Local debug/build artifacts
+.dbg/
+debug-ios-native-loading.md
+ios/ShopPilotNative/.derivedData/
+ios/ShopPilotNative/ShopPilotNative.xcodeproj/project.xcworkspace/xcuserdata/

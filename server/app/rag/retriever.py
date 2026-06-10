@@ -130,6 +130,9 @@ class ProductRetriever:
             "手机": {"智能手机"},
             "平板": {"平板电脑"},
             "电脑": {"笔记本电脑"},
+            "香水": {"香水"},
+            "香氛": {"香水", "香氛"},
+            "扫地机器人": {"扫地机器人"},
         }
         sub_category = (product.sub_category or "").lower()
         if category in strict_mapping:
