@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "ShopPilot AI",
+    "slug": "shoppilot-ai",
+    "scheme": "shoppilot",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "platforms": ["ios", "android", "web"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.shoPilot.ai",
+      "infoPlist": {
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true
+        }
+      }
+    },
+    "android": {
+      "package": "com.shoPilot.ai",
+      "usesCleartextTraffic": true,
+      "adaptiveIcon": {
+        "backgroundColor": "#FCF8FF"
+      }
+    },
+    "web": {
+      "bundler": "metro"
+    },
+    "splash": {
+      "backgroundColor": "#FCF8FF",
+      "resizeMode": "contain"
+    }
+  }
+}

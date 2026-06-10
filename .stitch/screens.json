@@ -1,0 +1,63 @@
+{
+  "project": {
+    "title": "ShopPilot AI Shopping Assistant",
+    "id": "6699502356344548246"
+  },
+  "screens": [
+    {
+      "slug": "home",
+      "title": "首页 / 启动页",
+      "id": "d2ffa7b2f9104f5985b4b62df86b8f90"
+    },
+    {
+      "slug": "chat-thinking",
+      "title": "聊天页 - AI思考中状态",
+      "id": "029bdb70aaf24e58a2a8a15532b8ed16"
+    },
+    {
+      "slug": "chat-recommendations",
+      "title": "聊天与商品推荐页",
+      "id": "9b6b5a96ecd2498f8b65e22a8b6b96c7"
+    },
+    {
+      "slug": "error-feedback",
+      "title": "异常与反馈状态 (Error/No Result/Toast)",
+      "id": "0c8b78c3317e4ffda9abcbb800e294a3"
+    },
+    {
+      "slug": "chat-empty",
+      "title": "聊天页 - 首次进入空状态",
+      "id": "1305add32ab34b31a37e5c208fca88af"
+    },
+    {
+      "slug": "review-references",
+      "title": "商品测评参考模块",
+      "id": "227f47235cfd484489c45c9add4771d7"
+    },
+    {
+      "slug": "chat-streaming",
+      "title": "聊天页 - AI分段输出状态输出中",
+      "id": "53ff9fed267042c39f3e7724e46fbe8c"
+    },
+    {
+      "slug": "product-detail-sheet",
+      "title": "商品详情弹层",
+      "id": "cc15e6391cf549558007823621e3b59d"
+    },
+    {
+      "slug": "compare-panel",
+      "title": "商品对比面板",
+      "id": "5ae580e4f1d848d7bd90c743f52122ae"
+    },
+    {
+      "slug": "main-flow",
+      "title": "ShopPilot AI - 整合交互全流程主屏",
+      "id": "d708b4762f1c4a418f8bb58726fbb279"
+    },
+    {
+      "slug": "cart-drawer",
+      "title": "购物车抽屉",
+      "id": "a7504680080e4eba8296b860f899d5f8"
+    }
+  ]
+}

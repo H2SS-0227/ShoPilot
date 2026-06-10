@@ -1,0 +1,279 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>ShopPilot AI - 测评参考</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-container": "#6063ee",
+                    "on-tertiary-fixed-variant": "#703700",
+                    "on-secondary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "outline-variant": "#c7c4d7",
+                    "surface-bright": "#fcf8ff",
+                    "surface-dim": "#dbd8e4",
+                    "inverse-primary": "#c0c1ff",
+                    "error-container": "#ffdad6",
+                    "outline": "#767586",
+                    "inverse-surface": "#303038",
+                    "surface-variant": "#e4e1ed",
+                    "on-secondary-container": "#fffbff",
+                    "tertiary": "#904900",
+                    "surface-tint": "#494bd6",
+                    "surface-container-high": "#e9e6f3",
+                    "on-background": "#1b1b23",
+                    "tertiary-fixed-dim": "#ffb783",
+                    "on-surface-variant": "#464554",
+                    "secondary": "#8127cf",
+                    "tertiary-container": "#b55d00",
+                    "surface-container": "#efecf8",
+                    "on-tertiary-container": "#fffbff",
+                    "on-primary-container": "#fffbff",
+                    "on-tertiary-fixed": "#301400",
+                    "inverse-on-surface": "#f2effb",
+                    "on-secondary-fixed": "#2c0051",
+                    "secondary-fixed": "#f0dbff",
+                    "secondary-container": "#9c48ea",
+                    "error": "#ba1a1a",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#e1e0ff",
+                    "surface-container-low": "#f5f2fe",
+                    "surface-container-highest": "#e4e1ed",
+                    "on-primary-fixed-variant": "#2f2ebe",
+                    "surface": "#fcf8ff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed": "#07006c",
+                    "primary-fixed-dim": "#c0c1ff",
+                    "tertiary-fixed": "#ffdcc5",
+                    "background": "#fcf8ff",
+                    "primary": "#4648d4",
+                    "on-secondary-fixed-variant": "#6900b3",
+                    "on-surface": "#1b1b23",
+                    "secondary-fixed-dim": "#ddb7ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "unit": "4px",
+                    "stack-sm": "8px",
+                    "margin-desktop": "40px",
+                    "stack-lg": "32px",
+                    "gutter": "24px",
+                    "stack-md": "16px",
+                    "container-max-width": "1280px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "label-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(252, 248, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.5);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #4648d4, #8127cf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .scroll-hidden::-webkit-scrollbar {
+            display: none;
+        }
+        .scroll-hidden {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen antialiased flex flex-col items-center pb-24 md:pb-0">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center px-margin-mobile h-16 w-full fixed top-0 z-50 bg-surface/70 backdrop-blur-md border-b border-outline-variant/30">
+<button class="text-on-surface-variant hover:bg-surface-container-high/50 transition-colors p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<div class="font-headline-md text-headline-md-mobile font-bold text-on-surface">
+            ShopPilot AI
+        </div>
+<button class="text-on-surface-variant hover:bg-surface-container-high/50 transition-colors p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+</header>
+<!-- Main Content Area -->
+<main class="w-full max-w-container-max-width mt-16 px-margin-mobile md:px-margin-desktop py-stack-lg flex flex-col gap-stack-lg">
+<!-- Hero Section / Context -->
+<div class="text-center md:text-left mb-stack-md">
+<h1 class="font-headline-lg text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary mb-unit">Sony WH-1000XM5 无线降噪耳机</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">智能推荐分析与全网测评聚合</p>
+</div>
+<!-- Section: ReviewReferenceCard (Horizontal Scroll on Mobile, Grid on Desktop) -->
+<section class="flex flex-col gap-stack-md">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md-mobile md:font-headline-md md:text-headline-md flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">rate_review</span>
+                    全网测评速览
+                </h2>
+<button class="font-label-md text-label-md text-primary hover:underline">查看全部</button>
+</div>
+<!-- Card Container -->
+<div class="flex overflow-x-auto scroll-hidden gap-stack-md pb-4 md:grid md:grid-cols-3 md:overflow-visible">
+<!-- Review Card 1 (YouTube Style) -->
+<article class="min-w-[280px] md:min-w-0 bg-surface-container-lowest rounded-2xl p-stack-md shadow-md border border-outline-variant/10 flex flex-col gap-stack-sm hover:shadow-lg transition-shadow duration-300 relative group cursor-pointer">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-8 h-8 rounded-full bg-[#FF0000]/10 flex items-center justify-center text-[#FF0000] overflow-hidden">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+</div>
+<div class="flex-1">
+<h3 class="font-label-md text-label-md text-on-surface">TechReviewer Pro</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">YouTube · 120k 观看</p>
+</div>
+</div>
+<h4 class="font-body-md text-body-md font-bold text-on-background line-clamp-2">深度体验：降噪天花板还是挤牙膏？</h4>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-3 text-sm leading-relaxed">XM5 的降噪能力确实有提升，特别是在中高频部分。但是外观设计的改变褒贬不一，无法折叠收纳是个痛点...</p>
+<div class="absolute inset-0 bg-surface/50 backdrop-blur-sm rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<button class="bg-primary text-on-primary font-label-md text-label-md px-6 py-2 rounded-full shadow-md hover:bg-surface-tint transition-colors flex items-center gap-2">
+<span class="">查看测评</span>
+<span class="material-symbols-outlined text-[18px]">open_in_new</span>
+</button>
+</div>
+</article>
+<!-- Review Card 2 (TikTok Style) -->
+<article class="min-w-[280px] md:min-w-0 bg-surface-container-lowest rounded-2xl p-stack-md shadow-md border border-outline-variant/10 flex flex-col gap-stack-sm hover:shadow-lg transition-shadow duration-300 relative group cursor-pointer">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-on-background overflow-hidden">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">music_note</span>
+</div>
+<div class="flex-1">
+<h3 class="font-label-md text-label-md text-on-surface">数码潮人</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">TikTok · 50k 点赞</p>
+</div>
+</div>
+<h4 class="font-body-md text-body-md font-bold text-on-background line-clamp-2">一分钟告诉你XM5值不值得买！</h4>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-3 text-sm leading-relaxed">颜值真的高，佩戴比上一代舒服太多了，戴眼镜完全不夹头。麦克风收音无敌，打电话对方听得很清楚👍...</p>
+<div class="absolute inset-0 bg-surface/50 backdrop-blur-sm rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<button class="bg-primary text-on-primary font-label-md text-label-md px-6 py-2 rounded-full shadow-md hover:bg-surface-tint transition-colors flex items-center gap-2">
+<span class="">查看测评</span>
+<span class="material-symbols-outlined text-[18px]">open_in_new</span>
+</button>
+</div>
+</article>
+<!-- Review Card 3 (Little Red Book Style) -->
+<article class="min-w-[280px] md:min-w-0 bg-surface-container-lowest rounded-2xl p-stack-md shadow-md border border-outline-variant/10 flex flex-col gap-stack-sm hover:shadow-lg transition-shadow duration-300 relative group cursor-pointer">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-8 h-8 rounded-full bg-error-container flex items-center justify-center text-error overflow-hidden">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div class="flex-1">
+<h3 class="font-label-md text-label-md text-on-surface">爱生活的莉莉</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">小红书 · 图文</p>
+</div>
+</div>
+<h4 class="font-body-md text-body-md font-bold text-on-background line-clamp-2">通勤打工人必备🎧索尼XM5开箱</h4>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-3 text-sm leading-relaxed">米白色真的绝美！冬天当耳罩保暖又时尚。音质一如既往的好，降噪开起来整个世界都安静了，早高峰地铁救星...</p>
+<div class="absolute inset-0 bg-surface/50 backdrop-blur-sm rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<button class="bg-primary text-on-primary font-label-md text-label-md px-6 py-2 rounded-full shadow-md hover:bg-surface-tint transition-colors flex items-center gap-2">
+<span class="">查看测评</span>
+<span class="material-symbols-outlined text-[18px]">open_in_new</span>
+</button>
+</div>
+</article>
+</div>
+</section>
+<hr class="border-outline-variant/30 my-stack-md">
+<!-- Section: ReviewReferenceSheet (Detailed List View) -->
+<section class="flex flex-col gap-stack-md bg-surface-container-lowest rounded-xl p-margin-mobile md:p-margin-desktop shadow-[0_10px_15px_-3px_rgba(0,0,0,0.05)] border border-outline-variant/30">
+<div class="flex items-center gap-2 border-b border-outline-variant/30 pb-4 mb-2">
+<span class="material-symbols-outlined text-secondary text-[28px]" style="font-variation-settings: 'FILL' 1;">list_alt</span>
+<h2 class="font-headline-md text-headline-md-mobile md:font-headline-md md:text-headline-md">完整测评参考</h2>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center py-4 border-b border-outline-variant/20 last:border-0 hover:bg-surface-container-low transition-colors rounded-lg px-2">
+<div class="flex-1 flex flex-col gap-2">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="font-label-sm text-label-sm bg-[#0084ff]/10 text-[#0084ff] px-2 py-1 rounded">Zhihu</span>
+<span class="font-label-sm text-label-sm">@耳机吧长</span>
+</div>
+<h4 class="font-body-lg text-body-lg font-medium text-on-background">从声学角度解析索尼XM5，值不值得升级？</h4>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-1 mt-1">主观听感分享，三频表现分析，适合的音乐类型推荐...</p>
+</div>
+<button class="shrink-0 font-label-md text-label-md text-primary border border-primary/30 hover:bg-primary-container hover:text-on-primary-container px-4 py-2 rounded-full transition-colors flex items-center gap-1 w-full sm:w-auto justify-center">
+查看详情 <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</section>
+<hr class="border-outline-variant/30 my-stack-md">
+<!-- Section: No Review Reference State (Empty State) -->
+<section class="flex flex-col gap-stack-md">
+<h2 class="font-headline-md text-headline-md-mobile md:font-headline-md md:text-headline-md flex items-center gap-2 opacity-50">
+<span class="material-symbols-outlined text-outline">rate_review</span>
+                测评参考 (空状态演示)
+            </h2>
+<div class="bg-surface-container rounded-xl p-stack-lg flex flex-col items-center justify-center text-center border border-outline-variant/30 border-dashed">
+<span class="material-symbols-outlined text-[48px] text-outline-variant mb-2">search_off</span>
+<p class="font-body-md text-body-md text-on-surface-variant mb-1">暂无外部测评链接</p>
+<p class="font-label-sm text-label-sm text-outline">AI 助手正在努力为您全网搜寻中...</p>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe bg-surface/80 backdrop-blur-xl border-t border-outline-variant/20 shadow-lg md:hidden">
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-label-sm text-label-sm mt-1">发现</span>
+</button>
+<!-- Active Tab: Assuming we are exploring a product details page -->
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full w-12 h-12 scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+<span class="font-label-sm text-label-sm mt-1">AI助手</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm mt-1">我的</span>
+</button>
+</nav>
+
+
+</body></html>

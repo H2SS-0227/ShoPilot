@@ -1,0 +1,483 @@
+{
+  "summary": {
+    "case_count": 25,
+    "precision_at_3": 0.8267,
+    "capped_recall_at_3": 0.96,
+    "constraint_hit_rate": 0.96,
+    "grounding_rate": 1.0,
+    "hallucination_rate": 0.0,
+    "avg_latency_ms": 2.89,
+    "p95_latency_ms": 3.43
+  },
+  "cases": [
+    {
+      "query": "推荐一款 200 元以内的咖啡，并给我参考真实测评链接",
+      "status_code": 200,
+      "latency_ms": 10.91,
+      "intent": "recommend",
+      "product_ids": [
+        "p_food_022",
+        "p_food_023",
+        "p_food_002"
+      ],
+      "metrics": {
+        "precision_at_3": 1.0,
+        "capped_recall_at_3": 1.0,
+        "constraint_hit": true,
+        "grounding": true,
+        "hallucination_rate": 0.0
+      },
+      "follow_up": null
+    },
+    {
+      "query": "推荐不要太甜的咖啡，预算 100 元以内",
+      "status_code": 200,
+      "latency_ms": 2.53,
+      "intent": "recommend",
+      "product_ids": [
+        "p_food_023",
+        "p_food_022"
+      ],
+      "metrics": {
+        "precision_at_3": 1.0,
+        "capped_recall_at_3": 1.0,
+        "constraint_hit": true,
+        "grounding": true,
+        "hallucination_rate": 0.0
+      },
+      "follow_up": null
+    },
+    {
+      "query": "推荐适合油皮的防晒，200 元以内",
+      "status_code": 200,
+      "latency_ms": 2.04,
+      "intent": "recommend",
+      "product_ids": [
+        "p_beauty_006"
+      ],
+      "metrics": {
+        "precision_at_3": 1.0,
+        "capped_recall_at_3": 1.0,
+        "constraint_hit": true,
+        "grounding": true,
+        "hallucination_rate": 0.0
+      },
+      "follow_up": null
+    },
+    {
+      "query": "敏感肌能用的精华，预算 300 元以内",
+      "status_code": 200,
+      "latency_ms": 2.14,
+      "intent": "recommend",
+      "product_ids": [
+        "p_beauty_018",
+        "p_beauty_024",
+        "p_beauty_009"
+      ],
+      "metrics": {
+        "precision_at_3": 1.0,
+        "capped_recall_at_3": 1.0,
+        "constraint_hit": true,
+        "grounding": true,
+        "hallucination_rate": 0.0
+      },
+      "follow_up": null
+    },
+    {
+      "query": "推荐一款通勤跑鞋，500 元以内",
+      "status_code": 200,
+      "latency_ms": 2.1,
+      "intent": "recommend",
+      "product_ids": [],
+      "metrics": {
+        "precision_at_3": 0.0,
+        "capped_recall_at_3": 0.0,
+        "constraint_hit": true,
+        "grounding": true,
+        "hallucination_rate": 0.0
+      },
+      "follow_up": null
+    },
+    {
+      "query": "想买学生党能负担的蓝牙耳机",
+      "status_code": 200,
+      "latency_ms": 3.08,
+      "intent": "recommend",
+      "product_ids": [
+        "p_digital_018",
+        "p_digital_007"
+      ],
+      "metrics": {
+        "precision_at_3": 1.0,
+        "capped_recall_at_3": 1.0,
+        "constraint_hit": true,
+        "grounding": true,
+        "hallucination_rate": 0.0
+      },
+      "follow_up": null
+    },
+    {
+      "query": "推荐一台适合办公的笔记本电脑",
+      "status_code": 200,
+      "latency_ms": 2.38,
+      "intent": "recommend",
+      "product_ids": [
+        "p_digital_023",
+        "p_digital_022",
+        "p_digital_004"
+      ],
+      "metrics": {
+        "precision_at_3": 1.0,
+        "capped_recall_at_3": 1.0,
+        "constraint_hit": true,
+        "grounding": true,
+        "hallucination_rate": 0.0
+      },
+      "follow_up": null
+    },
+    {
+      "query": "推荐一款适合上课记笔记的平板电脑",
+      "status_code": 200,
+      "latency_ms": 2.56,
+      "intent": "recommend",
+      "product_ids": [
+        "p_digital_011",
+        "p_digital_005",
+        "p_digital_025"
+      ],
+      "metrics": {
+        "precision_at_3": 1.0,
+        "capped_recall_at_3": 1.0,
+        "constraint_hit": true,
+        "grounding": true,
+        "hallucination_rate": 0.0
+      },
+      "follow_up": null
+    },
+    {
+      "query": "推荐 1 元以内的笔记本电脑",
+      "status_code": 200,
+      "latency_ms": 1.52,
+      "intent": "recommend",
+      "product_ids": [],
+      "metrics": {
+        "precision_at_3": 1.0,
+        "capped_recall_at_3": 1.0,
+        "constraint_hit": true,
+        "grounding": true,
+        "hallucination_rate": 0.0
+      },
+      "follow_up": null
+    },
+    {
+      "query": "推荐适合旅行的洁面，不要酒精",
+      "status_code": 200,
+      "latency_ms": 2.41,
+      "intent": "recommend",
+      "product_ids": [
+        "p_beauty_023",
+        "p_beauty_003",
+        "p_beauty_011"
+      ],
+      "metrics": {
+        "precision_at_3": 1.0,
+        "capped_recall_at_3": 1.0,
+        "constraint_hit": false,
+        "grounding": true,
+        "hallucination_rate": 0.0
+      },
+      "follow_up": null
+    },
+    {
+      "query": "推荐控油洗面奶",
+      "status_code": 200,
+      "latency_ms": 2.53,
+      "intent": "recommend",
+      "product_ids": [
+        "p_beauty_018",
+        "p_beauty_023",
+        "p_beauty_001"
+      ],
+      "metrics": {
+        "precision_at_3": 1.0,
+        "capped_recall_at_3": 1.0,
+        "constraint_hit": true,
+        "grounding": true,
+        "hallucination_rate": 0.0
+      },
+      "follow_up": null
+    },
+    {
+      "query": "推荐性价比短袖 T恤",
+      "status_code": 200,
+      "latency_ms": 3.17,
+      "intent": "recommend",
+      "product_ids": [
+        "p_clothes_003",
+        "p_clothes_021",
+        "p_clothes_002"
+      ],
+      "metrics": {
+        "precision_at_3": 1.0,
+        "capped_recall_at_3": 1.0,
+        "constraint_hit": true,
+        "grounding": true,
+        "hallucination_rate": 0.0
+      },
+      "follow_up": null
+    },
+    {
+      "query": "推荐一件运动卫衣",
+      "status_code": 200,
+      "latency_ms": 3.23,
+      "intent": "recommend",
+      "product_ids": [
+        "p_clothes_005",
+        "p_clothes_023",
+        "p_clothes_003"
+      ],
+      "metrics": {
+        "precision_at_3": 0.3333,
+        "capped_recall_at_3": 1.0,
+        "constraint_hit": true,
+        "grounding": true,
+        "hallucination_rate": 0.0
+      },
+      "follow_up": null
+    },
+    {
+      "query": "推荐户外裤",
+      "status_code": 200,
+      "latency_ms": 2.77,
+      "intent": "recommend",
+      "product_ids": [
+        "p_clothes_017",
+        "p_clothes_023",
+        "p_clothes_006"
+      ],
+      "metrics": {
+        "precision_at_3": 0.3333,
+        "capped_recall_at_3": 1.0,
+        "constraint_hit": true,
+        "grounding": true,
+        "hallucination_rate": 0.0
+      },
+      "follow_up": null
+    },
+    {
+      "query": "推荐低脂酸奶",
+      "status_code": 200,
+      "latency_ms": 2.83,
+      "intent": "recommend",
+      "product_ids": [
+        "p_food_017",
+        "p_food_008",
+        "p_food_007"
+      ],
+      "metrics": {
+        "precision_at_3": 0.6667,
+        "capped_recall_at_3": 1.0,
+        "constraint_hit": true,
+        "grounding": true,
+        "hallucination_rate": 0.0
+      },
+      "follow_up": null
+    },
+    {
+      "query": "推荐一款功能饮料",
+      "status_code": 200,
+      "latency_ms": 2.89,
+      "intent": "recommend",
+      "product_ids": [
+        "p_food_005",
+        "p_food_006",
+        "p_food_025"
+      ],
+      "metrics": {
+        "precision_at_3": 1.0,
+        "capped_recall_at_3": 1.0,
+        "constraint_hit": true,
+        "grounding": true,
+        "hallucination_rate": 0.0
+      },
+      "follow_up": null
+    },
+    {
+      "query": "推荐坚果零食",
+      "status_code": 200,
+      "latency_ms": 2.56,
+      "intent": "recommend",
+      "product_ids": [
+        "p_food_019",
+        "p_food_009",
+        "p_food_010"
+      ],
+      "metrics": {
+        "precision_at_3": 1.0,
+        "capped_recall_at_3": 1.0,
+        "constraint_hit": true,
+        "grounding": true,
+        "hallucination_rate": 0.0
+      },
+      "follow_up": null
+    },
+    {
+      "query": "推荐一款智能手机",
+      "status_code": 200,
+      "latency_ms": 2.33,
+      "intent": "recommend",
+      "product_ids": [
+        "p_digital_017",
+        "p_digital_015",
+        "p_digital_008"
+      ],
+      "metrics": {
+        "precision_at_3": 1.0,
+        "capped_recall_at_3": 1.0,
+        "constraint_hit": true,
+        "grounding": true,
+        "hallucination_rate": 0.0
+      },
+      "follow_up": null
+    },
+    {
+      "query": "推荐一款蜜粉",
+      "status_code": 200,
+      "latency_ms": 2.58,
+      "intent": "recommend",
+      "product_ids": [
+        "p_beauty_014",
+        "p_beauty_013",
+        "p_beauty_016"
+      ],
+      "metrics": {
+        "precision_at_3": 0.6667,
+        "capped_recall_at_3": 1.0,
+        "constraint_hit": true,
+        "grounding": true,
+        "hallucination_rate": 0.0
+      },
+      "follow_up": null
+    },
+    {
+      "query": "推荐一支唇釉",
+      "status_code": 200,
+      "latency_ms": 2.77,
+      "intent": "recommend",
+      "product_ids": [
+        "p_beauty_015",
+        "p_digital_024",
+        "p_food_019"
+      ],
+      "metrics": {
+        "precision_at_3": 0.3333,
+        "capped_recall_at_3": 1.0,
+        "constraint_hit": true,
+        "grounding": true,
+        "hallucination_rate": 0.0
+      },
+      "follow_up": null
+    },
+    {
+      "query": "推荐一款眼霜",
+      "status_code": 200,
+      "latency_ms": 2.54,
+      "intent": "recommend",
+      "product_ids": [
+        "p_beauty_016",
+        "p_beauty_021",
+        "p_beauty_008"
+      ],
+      "metrics": {
+        "precision_at_3": 0.6667,
+        "capped_recall_at_3": 1.0,
+        "constraint_hit": true,
+        "grounding": true,
+        "hallucination_rate": 0.0
+      },
+      "follow_up": null
+    },
+    {
+      "query": "推荐一款化妆水",
+      "status_code": 200,
+      "latency_ms": 2.48,
+      "intent": "recommend",
+      "product_ids": [
+        "p_beauty_019",
+        "p_beauty_003",
+        "p_beauty_016"
+      ],
+      "metrics": {
+        "precision_at_3": 0.6667,
+        "capped_recall_at_3": 1.0,
+        "constraint_hit": true,
+        "grounding": true,
+        "hallucination_rate": 0.0
+      },
+      "follow_up": null
+    },
+    {
+      "query": "推荐篮球鞋",
+      "status_code": 200,
+      "latency_ms": 3.43,
+      "intent": "recommend",
+      "product_ids": [
+        "p_clothes_013",
+        "p_clothes_011",
+        "p_clothes_012"
+      ],
+      "metrics": {
+        "precision_at_3": 1.0,
+        "capped_recall_at_3": 1.0,
+        "constraint_hit": true,
+        "grounding": true,
+        "hallucination_rate": 0.0
+      },
+      "follow_up": null
+    },
+    {
+      "query": "推荐咖啡",
+      "status_code": 200,
+      "latency_ms": 2.29,
+      "intent": "recommend",
+      "product_ids": [
+        "p_food_022",
+        "p_food_023",
+        "p_food_002"
+      ],
+      "metrics": {
+        "precision_at_3": 1.0,
+        "capped_recall_at_3": 1.0,
+        "constraint_hit": true,
+        "grounding": true,
+        "hallucination_rate": 0.0
+      },
+      "follow_up": {
+        "status_code": 200,
+        "intent": "compare"
+      }
+    },
+    {
+      "query": "推荐防晒",
+      "status_code": 200,
+      "latency_ms": 2.18,
+      "intent": "recommend",
+      "product_ids": [
+        "p_beauty_010",
+        "p_beauty_023",
+        "p_beauty_006"
+      ],
+      "metrics": {
+        "precision_at_3": 1.0,
+        "capped_recall_at_3": 1.0,
+        "constraint_hit": true,
+        "grounding": true,
+        "hallucination_rate": 0.0
+      },
+      "follow_up": {
+        "status_code": 200,
+        "intent": "add_to_cart"
+      }
+    }
+  ]
+}

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ShopPilot AI - Product Comparison</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#6063ee",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#301400",
+                        "inverse-primary": "#c0c1ff",
+                        "inverse-on-surface": "#f2effb",
+                        "background": "#fcf8ff",
+                        "tertiary-fixed": "#ffdcc5",
+                        "on-surface-variant": "#464554",
+                        "on-secondary-fixed": "#2c0051",
+                        "on-secondary-fixed-variant": "#6900b3",
+                        "on-primary-fixed-variant": "#2f2ebe",
+                        "surface-tint": "#494bd6",
+                        "on-tertiary-container": "#fffbff",
+                        "surface-container-highest": "#e4e1ed",
+                        "on-primary-container": "#fffbff",
+                        "tertiary-fixed-dim": "#ffb783",
+                        "surface": "#fcf8ff",
+                        "on-background": "#1b1b23",
+                        "surface-container": "#efecf8",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "primary": "#4648d4",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#9c48ea",
+                        "surface-container-high": "#e9e6f3",
+                        "secondary-fixed-dim": "#ddb7ff",
+                        "on-secondary-container": "#fffbff",
+                        "inverse-surface": "#303038",
+                        "secondary-fixed": "#f0dbff",
+                        "surface-variant": "#e4e1ed",
+                        "surface-container-low": "#f5f2fe",
+                        "tertiary": "#904900",
+                        "outline": "#767586",
+                        "primary-fixed-dim": "#c0c1ff",
+                        "surface-bright": "#fcf8ff",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#b55d00",
+                        "on-primary-fixed": "#07006c",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dbd8e4",
+                        "secondary": "#8127cf",
+                        "outline-variant": "#c7c4d7",
+                        "on-surface": "#1b1b23",
+                        "primary-fixed": "#e1e0ff",
+                        "on-tertiary-fixed-variant": "#703700",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "margin-mobile": "16px",
+                        "stack-lg": "32px",
+                        "container-max-width": "1280px",
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.5);
+        }
+        .ai-gradient {
+            background: linear-gradient(135deg, #4648d4 0%, #9c48ea 100%);
+        }
+        .ai-text-gradient {
+            background: linear-gradient(135deg, #4648d4 0%, #9c48ea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background antialiased pt-16 pb-24 md:pb-0 font-body-md">
+<!-- TopAppBar -->
+<header class="bg-surface/70 dark:bg-surface/70 backdrop-blur-md text-primary dark:text-inverse-primary docked full-width top-0 bg-surface/70 dark:bg-surface/70 backdrop-blur-md border-b border-outline-variant/30 flat no shadows flex justify-between items-center px-margin-mobile h-16 w-full fixed top-0 z-50 transition-transform duration-200">
+<button class="flex items-center justify-center p-2 rounded-full hover:bg-surface-container-high/50 transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-headline-md text-headline-md-mobile font-bold text-on-surface dark:text-inverse-on-surface">ShopPilot AI</h1>
+<div class="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden border border-outline-variant/30 flex-shrink-0 cursor-pointer hover:opacity-80 transition-opacity">
+<img alt="User profile avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDKtUcRbZRtXQBXnnzvX-dqmN54TnTx6AX4r8e9j0f4tsrtpdtJBfOWnJQ4xkzCyf62QL1iwqO0QZcSwucEcybUMu62Srhqgo3LQ8w4JvUXrRxEWxCyxBkXNYvIVkc4yLE1_AyqTRY12YNUuv4fKAFwnxXWo3s1ytmFt3xYxJOd8zf7wR40LkJ_qBobMcWLTfhun5XgArZVpe6AxIGxbq5dCmnGvr9MONxMNyINw0AdinGGzCH-TPRMLOp2eqjLcjaQ13vVioKbM0"/>
+</div>
+</header>
+<main class="max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop py-stack-md flex flex-col gap-stack-lg">
+<!-- Header -->
+<div class="flex flex-col items-center text-center space-y-unit">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Compare Tents</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">Comparing options for your upcoming weekend camping trip in the Pacific Northwest.</p>
+</div>
+<!-- Comparison Grid -->
+<div class="grid grid-cols-2 gap-gutter md:gap-stack-lg">
+<!-- Product 1 -->
+<div class="flex flex-col gap-stack-md bg-surface-container-lowest rounded-xl p-stack-sm md:p-stack-md border border-outline-variant/30 shadow-sm relative group transition-transform hover:-translate-y-1">
+<div class="w-full aspect-square rounded-lg overflow-hidden bg-surface-container relative">
+<img alt="A sturdy, geodesic dome tent set up in a dense, misty evergreen forest. The lighting is overcast and cool, highlighting the robust orange and grey fabric of the tent against the deep greens of the surrounding trees. The scene conveys a sense of rugged outdoor adventure and reliable shelter in potentially harsh conditions. A small lantern sits near the entrance, adding a warm, subtle glow. High-quality product photography with a focus on durability." class="w-full h-full object-cover" data-alt="A sturdy, geodesic dome tent set up in a dense, misty evergreen forest. The lighting is overcast and cool, highlighting the robust orange and grey fabric of the tent against the deep greens of the surrounding trees. The scene conveys a sense of rugged outdoor adventure and reliable shelter in potentially harsh conditions. A small lantern sits near the entrance, adding a warm, subtle glow. High-quality product photography with a focus on durability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAcQm7l3eu8f33dX1NslfWDZ7fIJgf0z21rMJqI-2kHYyRV4y-aCa-yXsqD1kNxVRfO4Y4581Vt89wtacCY0x_KrlzGtnkr4FfNJT9iOLZSkubOi8aD-dRxAL_KL4zo6Hdp0j-2n9guYJD-Jqv2Le3jQDbmD2oTYV4X0e9OjE5pRyxDTqPw3QdubrtDz1rltHIKVzYV9gSYMZMj_fS6CLzBL1H1RZR_PtPtu6n-4wHe1_VPBXm0F6oQJGDaQzJ24WTBkXAEoKREpw"/>
+<div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<button class="bg-surface/90 text-primary font-label-md text-label-md px-4 py-2 rounded-full shadow-md hover:bg-surface transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">auto_awesome</span> Ask AI
+                        </button>
+</div>
+</div>
+<div class="flex flex-col gap-unit">
+<span class="font-label-sm text-label-sm text-tertiary uppercase tracking-wider">Geodesic Dome</span>
+<h3 class="font-headline-md text-headline-md-mobile text-on-surface">Alpine Ridge 3-Person</h3>
+<div class="font-headline-md text-headline-md text-primary">$349</div>
+</div>
+<div class="flex flex-col gap-stack-sm pt-stack-sm border-t border-outline-variant/20">
+<h4 class="font-label-md text-label-md text-on-surface-variant flex items-center gap-2"><span class="material-symbols-outlined text-sm">verified</span> Core Strengths</h4>
+<ul class="font-body-md text-body-md text-on-surface space-y-1">
+<li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-sm mt-1">check</span> Superior wind resistance</li>
+<li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-sm mt-1">check</span> Excellent condensation management</li>
+</ul>
+</div>
+<div class="flex flex-col gap-stack-sm pt-stack-sm border-t border-outline-variant/20">
+<h4 class="font-label-md text-label-md text-on-surface-variant flex items-center gap-2"><span class="material-symbols-outlined text-sm">hiking</span> Best For</h4>
+<p class="font-body-md text-body-md text-on-surface">Exposed ridges, alpine environments, and unpredictable heavy weather.</p>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="flex flex-col gap-stack-md bg-surface-container-lowest rounded-xl p-stack-sm md:p-stack-md border border-primary/30 shadow-md relative group transition-transform hover:-translate-y-1 ring-1 ring-primary/20">
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 ai-gradient text-on-primary font-label-sm text-label-sm px-3 py-1 rounded-full shadow-sm z-10 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">star</span> Recommended
+                </div>
+<div class="w-full aspect-square rounded-lg overflow-hidden bg-surface-container relative">
+<img alt="A modern, lightweight tunnel tent pitched on a grassy meadow near a serene alpine lake. The morning sun casts long, warm shadows and illuminates the bright yellow and green nylon material. The setting is calm and inviting, suggesting an easy, comfortable camping experience. The tent's streamlined design is prominent against the clear blue sky. High-resolution lifestyle product shot highlighting ease of use and bright aesthetics." class="w-full h-full object-cover" data-alt="A modern, lightweight tunnel tent pitched on a grassy meadow near a serene alpine lake. The morning sun casts long, warm shadows and illuminates the bright yellow and green nylon material. The setting is calm and inviting, suggesting an easy, comfortable camping experience. The tent's streamlined design is prominent against the clear blue sky. High-resolution lifestyle product shot highlighting ease of use and bright aesthetics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBi62GCCl2deSUU3vdaZsfL4wCQaELvcvC_YnEH2oryS2zuSQYoHnT3lrqjBQWTe7j8T0LC3syrcsH-p7gAXMOQbhzND36w9r-VLaV7oaYFQcb0FL0OTXz7PMVzhbQj8RBzX-MgMjbCyEgDD3V5K_8YlRg9x7K8rfFu1DxHMT9FJzZPk9s11-Vun3Rbrd_KGFEVARjX1wysv6LuwFhRjbh-eKqPsYy52CYUVkX8t4ASLLDN6l3_Ga9OAFsFsxB5nMNYLtHDXoOP4Bs"/>
+<div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<button class="bg-surface/90 text-primary font-label-md text-label-md px-4 py-2 rounded-full shadow-md hover:bg-surface transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">auto_awesome</span> Ask AI
+                        </button>
+</div>
+</div>
+<div class="flex flex-col gap-unit">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider">Tunnel / Hub</span>
+<h3 class="font-headline-md text-headline-md-mobile text-on-surface">Meadow Trail Ultralight</h3>
+<div class="font-headline-md text-headline-md text-primary">$289</div>
+</div>
+<div class="flex flex-col gap-stack-sm pt-stack-sm border-t border-outline-variant/20">
+<h4 class="font-label-md text-label-md text-on-surface-variant flex items-center gap-2"><span class="material-symbols-outlined text-sm">verified</span> Core Strengths</h4>
+<ul class="font-body-md text-body-md text-on-surface space-y-1">
+<li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-sm mt-1">check</span> Extremely fast setup (under 3 mins)</li>
+<li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-sm mt-1">check</span> Massive vestibule for gear storage</li>
+</ul>
+</div>
+<div class="flex flex-col gap-stack-sm pt-stack-sm border-t border-outline-variant/20">
+<h4 class="font-label-md text-label-md text-on-surface-variant flex items-center gap-2"><span class="material-symbols-outlined text-sm">forest</span> Best For</h4>
+<p class="font-body-md text-body-md text-on-surface">Forested areas, car camping, and trips where quick shelter is a priority.</p>
+</div>
+</div>
+</div>
+<!-- AI Recommendation Section -->
+<div class="glass-panel rounded-2xl p-stack-md md:p-stack-lg flex flex-col md:flex-row gap-stack-md items-start mt-stack-md relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-secondary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none"></div>
+<div class="w-12 h-12 rounded-full ai-gradient flex items-center justify-center flex-shrink-0 shadow-lg text-on-primary">
+<span class="material-symbols-outlined">auto_awesome</span>
+</div>
+<div class="flex flex-col gap-stack-sm z-10">
+<h3 class="font-headline-md text-headline-md-mobile md:text-headline-md ai-text-gradient font-bold">ShopPilot Conclusion</h3>
+<p class="font-body-lg text-body-lg text-on-surface leading-relaxed">
+                    Based on your plan for a weekend in the Pacific Northwest forests, I recommend the <strong>Meadow Trail Ultralight</strong>. While the Alpine Ridge offers superior wind resistance, you likely won't need that level of ruggedness in tree-covered areas. The Meadow Trail's larger vestibule will be much more useful for storing wet boots and gear if it rains, and the faster setup time means more time enjoying the campfire.
+                </p>
+<div class="flex flex-wrap gap-2 mt-2">
+<button class="bg-surface-container-high text-on-surface font-label-md text-label-md px-4 py-2 rounded-full hover:bg-surface-variant transition-colors flex items-center gap-2">
+                        Add Meadow Trail to Cart
+                    </button>
+<button class="bg-transparent border border-outline text-on-surface-variant font-label-md text-label-md px-4 py-2 rounded-full hover:bg-surface-container transition-colors">
+                        Ask a follow-up question
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden bg-surface/80 dark:bg-surface/80 backdrop-blur-xl text-primary dark:text-inverse-primary docked full-width bottom-0 rounded-t-xl bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-t border-outline-variant/20 shadow-lg dark:shadow-none fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary dark:hover:text-inverse-primary transition-colors group" href="#">
+<span class="material-symbols-outlined mb-1 group-active:scale-90 duration-150">chat_bubble</span>
+<span class="font-label-sm text-label-sm">Chat</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full w-12 h-12 shadow-sm transition-transform hover:scale-105" href="#">
+<span class="material-symbols-outlined scale-90 duration-150">search</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary dark:hover:text-inverse-primary transition-colors group" href="#">
+<span class="material-symbols-outlined mb-1 group-active:scale-90 duration-150">shopping_cart</span>
+<span class="font-label-sm text-label-sm">Cart</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary dark:hover:text-inverse-primary transition-colors group" href="#">
+<span class="material-symbols-outlined mb-1 group-active:scale-90 duration-150">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+</body></html>

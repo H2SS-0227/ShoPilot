@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "buildCommand": "cd client && npm install && npx expo export --platform web --output-dir dist",
+  "outputDirectory": "client/dist",
+  "functions": {
+    "api/index.py": {
+      "runtime": "python3.12",
+      "includeFiles": "server/**,ecommerce_agent_dataset/**"
+    }
+  },
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/index.py" },
+    { "source": "/health", "destination": "/api/index.py" },
+    { "source": "/assets/products/(.*)", "destination": "/api/index.py" }
+  ]
+}

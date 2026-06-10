@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ShopPilot AI - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#6063ee",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#301400",
+                        "inverse-primary": "#c0c1ff",
+                        "inverse-on-surface": "#f2effb",
+                        "background": "#fcf8ff",
+                        "tertiary-fixed": "#ffdcc5",
+                        "on-surface-variant": "#464554",
+                        "on-secondary-fixed": "#2c0051",
+                        "on-secondary-fixed-variant": "#6900b3",
+                        "on-primary-fixed-variant": "#2f2ebe",
+                        "surface-tint": "#494bd6",
+                        "on-tertiary-container": "#fffbff",
+                        "surface-container-highest": "#e4e1ed",
+                        "on-primary-container": "#fffbff",
+                        "tertiary-fixed-dim": "#ffb783",
+                        "surface": "#fcf8ff",
+                        "on-background": "#1b1b23",
+                        "surface-container": "#efecf8",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "primary": "#4648d4",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#9c48ea",
+                        "surface-container-high": "#e9e6f3",
+                        "secondary-fixed-dim": "#ddb7ff",
+                        "on-secondary-container": "#fffbff",
+                        "inverse-surface": "#303038",
+                        "secondary-fixed": "#f0dbff",
+                        "surface-variant": "#e4e1ed",
+                        "surface-container-low": "#f5f2fe",
+                        "tertiary": "#904900",
+                        "outline": "#767586",
+                        "primary-fixed-dim": "#c0c1ff",
+                        "surface-bright": "#fcf8ff",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#b55d00",
+                        "on-primary-fixed": "#07006c",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dbd8e4",
+                        "secondary": "#8127cf",
+                        "outline-variant": "#c7c4d7",
+                        "on-surface": "#1b1b23",
+                        "primary-fixed": "#e1e0ff",
+                        "on-tertiary-fixed-variant": "#703700",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "margin-mobile": "16px",
+                        "stack-lg": "32px",
+                        "container-max-width": "1280px",
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+        .bg-gradient-mesh {
+            background: radial-gradient(circle at 15% 50%, rgba(96, 99, 238, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 85% 30%, rgba(156, 72, 234, 0.1) 0%, transparent 50%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col font-sans antialiased overflow-x-hidden bg-gradient-mesh">
+<!-- TopAppBar -->
+<header class="bg-surface/70 backdrop-blur-md flex justify-between items-center px-margin-mobile h-16 w-full fixed top-0 z-50">
+<button class="text-on-surface-variant hover:bg-surface-container-high/50 p-2 rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-headline-md text-headline-md-mobile md:text-headline-md font-bold text-on-surface">ShopPilot AI</h1>
+<button class="text-on-surface-variant hover:bg-surface-container-high/50 rounded-full transition-colors overflow-hidden w-8 h-8 flex items-center justify-center">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="A small, professional user avatar portrait. The image shows a minimalist icon or a bright, clean portrait suitable for a modern tech application. Lighting is soft and even, and the color palette aligns with a white and purple tech theme. The overall feel is approachable and clean." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDF05mO13t5Cj-I2w9W5ng2qYpJ23PYcrTacG_ULvBnTbVhKmaaCvc-1hMQ6vks6Ek0lI02eJ5FOwlX-CHTZxzBHK8LU6EpYwIV41AkYzWHHSISy7xpzoVTdcU79BK4NZdyGIiXkHtcWRu6J7vorsPAVLiEelx2CDds15phM50onQhOqW5BwhP4IF6qXDx8i6HvJ7KxhK6LbNxZBNywZffEKXfX03y3MlMHyUcRTY78E2xrPZPtyTSt_HdjwgitQaUDoWP6MSwFrs"/>
+</button>
+</header>
+<!-- Main Content Area -->
+<main class="flex-grow flex flex-col items-center justify-center pt-24 pb-32 px-4 md:px-margin-desktop w-full max-w-container-max-width mx-auto">
+<!-- Hero Section -->
+<div class="text-center mb-stack-lg animate-[fadeIn_1s_ease-out]">
+<div class="inline-block mb-4 relative">
+<div class="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-xl blur opacity-30"></div>
+<div class="relative glass-panel rounded-xl p-4 flex items-center justify-center mb-6 w-20 h-20 mx-auto">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="smart_toy">smart_toy</span>
+</div>
+</div>
+<h2 class="font-display-lg text-display-lg text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mb-stack-sm drop-shadow-sm">
+                ShopPilot AI
+            </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg mx-auto">
+                会聊天、懂商品、能帮你做购买决策
+            </p>
+</div>
+<!-- AI Input Bar (Centralized for Desktop/Tablet) -->
+<div class="w-full max-w-2xl mx-auto mb-stack-lg relative z-10">
+<div class="glass-panel rounded-full p-2 flex items-center shadow-lg transition-transform focus-within:scale-[1.02] duration-300">
+<span class="material-symbols-outlined text-outline ml-4 mr-2" data-icon="search">search</span>
+<input class="flex-grow bg-transparent border-none focus:ring-0 text-on-surface font-body-md text-body-md placeholder:text-outline-variant py-3 px-2" placeholder="描述你想要寻找的商品或需求..." type="text"/>
+<button class="bg-gradient-to-r from-primary to-secondary text-on-primary w-12 h-12 rounded-full flex items-center justify-center hover:opacity-90 transition-opacity shadow-md">
+<span class="material-symbols-outlined" data-icon="send" data-weight="fill" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+</div>
+<!-- Quick Prompts Cards -->
+<div class="w-full max-w-3xl mx-auto">
+<h3 class="font-label-sm text-label-sm text-outline uppercase tracking-wider mb-stack-md text-center">试着问我</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<button class="group glass-panel rounded-xl p-4 text-left hover:bg-surface-container-low transition-all duration-300 hover:shadow-md border border-outline-variant/30 relative overflow-hidden flex flex-col justify-between min-h-[120px]">
+<div class="absolute -right-4 -top-4 w-16 h-16 bg-primary/5 rounded-full group-hover:scale-150 transition-transform duration-500 ease-out"></div>
+<span class="material-symbols-outlined text-primary mb-2" data-icon="headphones">headphones</span>
+<span class="font-label-md text-label-md text-on-surface group-hover:text-primary transition-colors block">帮我选一款高性价比耳机</span>
+</button>
+<button class="group glass-panel rounded-xl p-4 text-left hover:bg-surface-container-low transition-all duration-300 hover:shadow-md border border-outline-variant/30 relative overflow-hidden flex flex-col justify-between min-h-[120px]">
+<div class="absolute -right-4 -top-4 w-16 h-16 bg-secondary/5 rounded-full group-hover:scale-150 transition-transform duration-500 ease-out"></div>
+<span class="material-symbols-outlined text-secondary mb-2" data-icon="featured_seasonal_and_gifts">featured_seasonal_and_gifts</span>
+<span class="font-label-md text-label-md text-on-surface group-hover:text-secondary transition-colors block">最近有什么适合送礼的香水?</span>
+</button>
+<button class="group glass-panel rounded-xl p-4 text-left hover:bg-surface-container-low transition-all duration-300 hover:shadow-md border border-outline-variant/30 relative overflow-hidden flex flex-col justify-between min-h-[120px]">
+<div class="absolute -right-4 -top-4 w-16 h-16 bg-tertiary/5 rounded-full group-hover:scale-150 transition-transform duration-500 ease-out"></div>
+<span class="material-symbols-outlined text-tertiary mb-2" data-icon="compare_arrows">compare_arrows</span>
+<span class="font-label-md text-label-md text-on-surface group-hover:text-tertiary transition-colors block">我想对比一下这两款扫地机器人</span>
+</button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden bg-surface/80 backdrop-blur-xl rounded-t-xl fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe border-t border-outline-variant/20 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full w-12 h-12 scale-90 duration-150 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+<span class="hidden font-label-sm text-label-sm">Chat</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="hidden font-label-sm text-label-sm">Search</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="hidden font-label-sm text-label-sm">Cart</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="hidden font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+<!-- Safe Area for Mobile Bottom Nav -->
+<style>
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom, 16px); }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</body></html>

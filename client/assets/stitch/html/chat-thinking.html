@@ -1,0 +1,297 @@
+<!DOCTYPE html><html lang="zh-CN" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>ShopPilot AI - Chat</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        @keyframes typing {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+            100% { transform: translateY(0); }
+        }
+        .typing-dot {
+            animation: typing 1.4s infinite ease-in-out;
+        }
+        .typing-dot:nth-child(1) { animation-delay: 0s; }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        
+        @keyframes slideUpFade {
+            0% { opacity: 0; transform: translateY(20px) translateX(-50%); }
+            10% { opacity: 1; transform: translateY(0) translateX(-50%); }
+            90% { opacity: 1; transform: translateY(0) translateX(-50%); }
+            100% { opacity: 0; transform: translateY(-20px) translateX(-50%); }
+        }
+        .toast-animate {
+            animation: slideUpFade 3s forwards;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#6063ee",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#301400",
+                        "inverse-primary": "#c0c1ff",
+                        "inverse-on-surface": "#f2effb",
+                        "background": "#fcf8ff",
+                        "tertiary-fixed": "#ffdcc5",
+                        "on-surface-variant": "#464554",
+                        "on-secondary-fixed": "#2c0051",
+                        "on-secondary-fixed-variant": "#6900b3",
+                        "on-primary-fixed-variant": "#2f2ebe",
+                        "surface-tint": "#494bd6",
+                        "on-tertiary-container": "#fffbff",
+                        "surface-container-highest": "#e4e1ed",
+                        "on-primary-container": "#fffbff",
+                        "tertiary-fixed-dim": "#ffb783",
+                        "surface": "#fcf8ff",
+                        "on-background": "#1b1b23",
+                        "surface-container": "#efecf8",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "primary": "#4648d4",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#9c48ea",
+                        "surface-container-high": "#e9e6f3",
+                        "secondary-fixed-dim": "#ddb7ff",
+                        "on-secondary-container": "#fffbff",
+                        "inverse-surface": "#303038",
+                        "secondary-fixed": "#f0dbff",
+                        "surface-variant": "#e4e1ed",
+                        "surface-container-low": "#f5f2fe",
+                        "tertiary": "#904900",
+                        "outline": "#767586",
+                        "primary-fixed-dim": "#c0c1ff",
+                        "surface-bright": "#fcf8ff",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#b55d00",
+                        "on-primary-fixed": "#07006c",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dbd8e4",
+                        "secondary": "#8127cf",
+                        "outline-variant": "#c7c4d7",
+                        "on-surface": "#1b1b23",
+                        "primary-fixed": "#e1e0ff",
+                        "on-tertiary-fixed-variant": "#703700",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "margin-mobile": "16px",
+                        "stack-lg": "32px",
+                        "container-max-width": "1280px",
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col items-center">
+<!-- Main Container -->
+<main class="w-full max-w-[800px] h-[884px] flex flex-col relative bg-surface-container-lowest shadow-sm overflow-hidden">
+<!-- TopAppBar (From JSON) -->
+<header class="bg-surface/70 backdrop-blur-md text-primary font-headline-md text-headline-md flex justify-between items-center px-margin-mobile h-16 w-full fixed top-0 z-50 border-b border-outline-variant/30 max-w-[800px]">
+<div class="flex items-center gap-stack-sm hover:bg-surface-container-high/50 transition-colors p-2 rounded-full cursor-pointer">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</div>
+<div class="flex items-center gap-2">
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface">ShopPilot AI</h1>
+<div class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
+</div>
+<div class="flex items-center justify-center w-10 h-10 rounded-full bg-surface-container-high hover:bg-surface-container-high/50 transition-colors cursor-pointer overflow-hidden">
+<img alt="User profile avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBWVymB7uG3eVUs8_51DesDtRULHhcZ5fo8U41YpYdo63f7A_YiOXpxSgGmWmF_AKJIV2_RL5ciFfzUBz_uU6E6UEA8w_c8CNyw8WbzroC7wOclgOa-BQGG0i99Q2SX7BVLNo0eU-04AzPPQkbaKNIlytvsDx6DyvngdUDVNEo8zZarR3jjUb2iR_pWIzfcLFRGNyeV3aGBg3GI9JNFetb-lsZaxfOBkhli3A_7Rp7E3wbgKzj0-CbP6mLM-lOn1cnnO-d0nKvx5s">
+</div>
+</header>
+<!-- Chat Canvas -->
+<div class="flex-1 overflow-y-auto pt-[80px] pb-[100px] px-margin-mobile flex flex-col gap-stack-lg scroll-smooth" id="chat-canvas">
+<!-- User Message -->
+<div class="flex flex-col items-end w-full">
+<div class="bg-primary text-on-primary rounded-2xl rounded-br-sm px-4 py-3 max-w-[85%] shadow-md">
+<p class="font-body-md text-body-md">我想买一个适合户外露营的蓝牙音箱，预算500元左右。</p>
+</div>
+<span class="text-on-surface-variant font-label-sm text-label-sm mt-1 mr-1 opacity-70">10:42 AM</span>
+</div>
+<!-- AI Message Cluster -->
+<div class="flex flex-col items-start w-full gap-stack-sm">
+<!-- AI Text Bubble -->
+<div class="flex gap-stack-sm items-end max-w-[90%]">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center shrink-0 shadow-sm border border-outline-variant/20">
+<span class="material-symbols-outlined text-on-primary-container text-[18px]" data-icon="smart_toy">smart_toy</span>
+</div>
+<div class="bg-surface-container text-on-surface rounded-2xl rounded-bl-sm px-4 py-3 shadow-[0_4px_12px_-2px_rgba(0,0,0,0.05)] border border-outline-variant/10 relative">
+<p class="font-body-md text-body-md leading-relaxed">没问题！为您筛选了三款高音质、长续航且防水的户外音箱。这几款在500元预算内性价比极高，非常适合露营使用：</p>
+<!-- Streaming Indicator -->
+<div class="flex gap-1 mt-2 flex-col items-start"><span class="text-[12px] text-on-surface-variant opacity-70 mb-1 block w-full">正在搜索商品库...</span><div class="w-full h-[2px] bg-surface-variant rounded-full overflow-hidden relative mb-2"><div class="absolute top-0 left-0 h-full w-1/3 bg-primary rounded-full animate-[progress_1.5s_infinite_ease-in-out]"></div></div></div>
+</div>
+</div>
+<!-- Product Carousel (Bento-style Cards) -->
+<div class="w-full overflow-x-auto hide-scrollbar pl-10 pr-4 py-2 -ml-10">
+<div class="flex gap-stack-md w-max ml-10">
+<!-- Product Card 1 -->
+<div class="w-[260px] bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-[0_8px_16px_-4px_rgba(0,0,0,0.05)] overflow-hidden flex flex-col group hover:shadow-[0_12px_24px_-6px_rgba(0,0,0,0.1)] transition-all duration-300 transform hover:-translate-y-1">
+<div class="h-[140px] w-full bg-surface-variant relative overflow-hidden">
+<img alt="A rugged, waterproof portable bluetooth speaker resting on a mossy rock in a forest setting. Soft natural daylight filtering through trees highlights the device's durable exterior. Modern outdoor adventure photography style, emphasizing resilience and high-quality audio equipment for camping." class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A rugged, waterproof portable bluetooth speaker resting on a mossy rock in a forest setting. Soft natural daylight filtering through trees highlights the device's durable exterior. Modern outdoor adventure photography style, emphasizing resilience and high-quality audio equipment for camping." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeTMKikkIpleEfnI_OeO7EKDmiG-qeyvi-1iAEc3FdUOtGMcmELAZMRkQYvUZUyT-fStfcgqeq4O4Hsf7ZwTwoQNgnXH5gam1gcTjnU2NU3Jubh5xt4VniiIFmTQCERvNuOa8jMNazp8sCCgKTYTCQ_FgxCw1eP0avYkxEBG00c5P7Bbbou7BrR79oqE3gxEhk1GRhkwyib_JNwlfKqojw5K9b8xUZZzqeDu8hF8sHmkCUGSglzxWwAPkdJ1QZiprMRQkXz-FbT-o">
+<div class="absolute top-2 left-2 bg-background/80 backdrop-blur-md px-2 py-1 rounded-md flex items-center gap-1 border border-outline-variant/20">
+<span class="material-symbols-outlined text-[14px] text-tertiary" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-label-sm text-on-surface">4.8</span>
+</div>
+</div>
+<div class="p-4 flex flex-col flex-1 gap-2">
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-label-md font-bold text-on-surface line-clamp-2 leading-tight">SoundLink Flex 户外防水音箱</h3>
+<span class="font-label-sm text-label-md text-primary font-bold">¥499</span>
+</div>
+<div class="flex gap-2 flex-wrap mt-1">
+<span class="bg-secondary-container/20 text-secondary px-2 py-0.5 rounded-full font-label-sm text-[10px] whitespace-nowrap border border-secondary-container/30">露营必备</span>
+<span class="bg-surface-variant text-on-surface-variant px-2 py-0.5 rounded-full font-label-sm text-[10px] whitespace-nowrap">IP67防水</span>
+</div>
+<p class="font-body-md text-[12px] text-on-surface-variant leading-snug mt-1 flex-1">低音浑厚，续航长达12小时，外壳耐摔设计，专为野外环境打造。</p>
+<div class="flex gap-2 mt-2 pt-2 border-t border-outline-variant/20">
+<button class="flex-1 bg-gradient-to-r from-primary to-secondary text-on-primary py-2 rounded-lg font-label-md text-label-sm flex justify-center items-center gap-1 hover:opacity-90 transition-opacity active:scale-95" onclick="showToast()">
+<span class="material-symbols-outlined text-[16px]" data-icon="shopping_cart">shopping_cart</span> 加购
+                                    </button>
+<button class="w-10 flex justify-center items-center border border-outline-variant text-on-surface rounded-lg hover:bg-surface-container transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[16px]" data-icon="compare_arrows">compare_arrows</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="w-[260px] bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-[0_8px_16px_-4px_rgba(0,0,0,0.05)] overflow-hidden flex flex-col group hover:shadow-[0_12px_24px_-6px_rgba(0,0,0,0.1)] transition-all duration-300 transform hover:-translate-y-1">
+<div class="h-[140px] w-full bg-surface-variant relative overflow-hidden">
+<img alt="A sleek, cylindrical wireless speaker hanging from a modern tent pole via a carabiner. Bright morning light creates a vibrant, optimistic mood. The design highlights portability and seamless integration into a light-mode outdoor adventure lifestyle, with sharp focus on the speaker mesh texture." class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A sleek, cylindrical wireless speaker hanging from a modern tent pole via a carabiner. Bright morning light creates a vibrant, optimistic mood. The design highlights portability and seamless integration into a light-mode outdoor adventure lifestyle, with sharp focus on the speaker mesh texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQhf_NVXtwyPPZ8e0D39oEi8R9uFAq-S8Zm7wCjcRUPfgRdlbgHeVI-PV9w_q4eM-EnE-o1SGDL8ktBhoORW43ZIRTkf_VdOT1RitmIBafQ8qeINF4bNGyuq878WzEFNKMpcyNW2trnpg1rsI4wmzgyBLbHxwWq2kCy4dryitMsqNpntvmix887NSiSx0wj6N4ebTm7oqYqP-jy84Ep6An5Dh_7EhSNsd_ueIZ0kNcZWMfY_GntScH8GQwFukBjkkk1Ic2KrSxRm4">
+</div>
+<div class="p-4 flex flex-col flex-1 gap-2">
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-label-md font-bold text-on-surface line-clamp-2 leading-tight">JBL Clip 4 便携式蓝牙音箱</h3>
+<span class="font-label-sm text-label-md text-primary font-bold">¥459</span>
+</div>
+<div class="flex gap-2 flex-wrap mt-1">
+<span class="bg-secondary-container/20 text-secondary px-2 py-0.5 rounded-full font-label-sm text-[10px] whitespace-nowrap border border-secondary-container/30">超轻便携</span>
+<span class="bg-surface-variant text-on-surface-variant px-2 py-0.5 rounded-full font-label-sm text-[10px] whitespace-nowrap">自带挂钩</span>
+</div>
+<p class="font-body-md text-[12px] text-on-surface-variant leading-snug mt-1 flex-1">自带一体化挂钩，可轻松挂在背包或帐篷上，非常适合徒步露营。</p>
+<div class="flex gap-2 mt-2 pt-2 border-t border-outline-variant/20">
+<button class="flex-1 bg-gradient-to-r from-primary to-secondary text-on-primary py-2 rounded-lg font-label-md text-label-sm flex justify-center items-center gap-1 hover:opacity-90 transition-opacity active:scale-95" onclick="showToast()">
+<span class="material-symbols-outlined text-[16px]" data-icon="shopping_cart">shopping_cart</span> 加购
+                                    </button>
+<button class="w-10 flex justify-center items-center border border-outline-variant text-on-surface rounded-lg hover:bg-surface-container transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[16px]" data-icon="compare_arrows">compare_arrows</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom spacer for sticky input -->
+<div class="h-10"></div>
+<div class="flex flex-col items-start w-full gap-stack-sm transition-all duration-500 animate-in fade-in slide-in-from-bottom-4">
+<div class="flex gap-stack-sm items-end max-w-[90%]">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center shrink-0 shadow-sm border border-outline-variant/20">
+<span class="material-symbols-outlined text-on-primary-container text-[18px]" data-icon="smart_toy">smart_toy</span>
+</div>
+<div class="bg-surface-container text-on-surface rounded-2xl rounded-bl-sm px-4 py-3 shadow-[0_4px_12px_-2px_rgba(0,0,0,0.05)] border border-outline-variant/10 relative">
+<div class="flex gap-1 items-center py-1">
+<div class="w-1.5 h-1.5 bg-primary rounded-full typing-dot opacity-60"></div>
+<div class="w-1.5 h-1.5 bg-primary rounded-full typing-dot opacity-60"></div>
+<div class="w-1.5 h-1.5 bg-primary rounded-full typing-dot opacity-60"></div>
+</div>
+</div>
+</div>
+</div></div>
+<!-- Sticky Input Area (Glassmorphism) -->
+<div class="absolute bottom-0 left-0 w-full bg-surface/80 backdrop-blur-xl border-t border-outline-variant/20 p-4 pb-safe z-40 max-w-[800px]">
+<div class="flex items-end gap-2 bg-surface-container-lowest rounded-2xl border border-outline-variant/40 shadow-sm p-2 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
+<button class="w-10 h-10 shrink-0 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors rounded-full hover:bg-surface-container">
+<span class="material-symbols-outlined" data-icon="add_photo_alternate">add_photo_alternate</span>
+</button>
+<div class="flex-1 relative">
+<textarea class="w-full bg-transparent border-none focus:ring-0 resize-none font-body-md text-body-md text-on-surface max-h-[120px] py-2 px-1 hide-scrollbar" oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'" placeholder="Message ShopPilot AI..." rows="1"></textarea>
+</div>
+<button class="w-10 h-10 shrink-0 flex items-center justify-center bg-gradient-to-tr from-primary to-secondary text-on-primary rounded-full hover:shadow-lg hover:opacity-90 transition-all active:scale-90">
+<span class="material-symbols-outlined text-[20px]" data-icon="send">send</span>
+</button>
+</div>
+<div class="flex justify-center gap-4 mt-3">
+<span class="font-label-sm text-[11px] text-on-surface-variant flex items-center gap-1 cursor-pointer hover:text-primary">
+<span class="material-symbols-outlined text-[14px]" data-icon="lightbulb">lightbulb</span> "500元以内的高性价比"
+                </span>
+<span class="font-label-sm text-[11px] text-on-surface-variant flex items-center gap-1 cursor-pointer hover:text-primary">
+<span class="material-symbols-outlined text-[14px]" data-icon="lightbulb">lightbulb</span> "对比这几款的续航"
+                </span>
+</div>
+</div>
+<!-- Toast Overlay (Added to Cart) -->
+<div class="fixed top-20 left-1/2 -translate-x-1/2 z-[100] bg-inverse-surface text-inverse-on-surface px-6 py-3 rounded-full shadow-lg flex items-center gap-2 opacity-0 pointer-events-none font-label-md text-label-md transition-all" id="cart-toast">
+<span class="material-symbols-outlined text-green-400" data-icon="check_circle">check_circle</span>
+            已成功加入购物车
+        </div>
+</main>
+<script>
+        function showToast() {
+            const toast = document.getElementById('cart-toast');
+            // Remove animation class if it exists to restart it
+            toast.classList.remove('toast-animate');
+            // Trigger reflow
+            void toast.offsetWidth;
+            // Add animation class
+            toast.classList.add('toast-animate');
+        }
+    </script>
+
+
+</body></html>

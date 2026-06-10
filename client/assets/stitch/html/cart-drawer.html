@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ShopPilot AI - Cart Drawer</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#6063ee",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#301400",
+                        "inverse-primary": "#c0c1ff",
+                        "inverse-on-surface": "#f2effb",
+                        "background": "#fcf8ff",
+                        "tertiary-fixed": "#ffdcc5",
+                        "on-surface-variant": "#464554",
+                        "on-secondary-fixed": "#2c0051",
+                        "on-secondary-fixed-variant": "#6900b3",
+                        "on-primary-fixed-variant": "#2f2ebe",
+                        "surface-tint": "#494bd6",
+                        "on-tertiary-container": "#fffbff",
+                        "surface-container-highest": "#e4e1ed",
+                        "on-primary-container": "#fffbff",
+                        "tertiary-fixed-dim": "#ffb783",
+                        "surface": "#fcf8ff",
+                        "on-background": "#1b1b23",
+                        "surface-container": "#efecf8",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "primary": "#4648d4",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#9c48ea",
+                        "surface-container-high": "#e9e6f3",
+                        "secondary-fixed-dim": "#ddb7ff",
+                        "on-secondary-container": "#fffbff",
+                        "inverse-surface": "#303038",
+                        "secondary-fixed": "#f0dbff",
+                        "surface-variant": "#e4e1ed",
+                        "surface-container-low": "#f5f2fe",
+                        "tertiary": "#904900",
+                        "outline": "#767586",
+                        "primary-fixed-dim": "#c0c1ff",
+                        "surface-bright": "#fcf8ff",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#b55d00",
+                        "on-primary-fixed": "#07006c",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dbd8e4",
+                        "secondary": "#8127cf",
+                        "outline-variant": "#c7c4d7",
+                        "on-surface": "#1b1b23",
+                        "primary-fixed": "#e1e0ff",
+                        "on-tertiary-fixed-variant": "#703700",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "margin-mobile": "16px",
+                        "stack-lg": "32px",
+                        "container-max-width": "1280px",
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #fcf8ff; /* surface color */
+        }
+        /* Custom scrollbar for cart items */
+        .cart-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .cart-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .cart-scroll::-webkit-scrollbar-thumb {
+            background-color: #c7c4d7; /* outline-variant */
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-body-md text-on-surface h-screen w-screen overflow-hidden relative flex">
+<!-- Top App Bar (From Shared Components) -->
+<header class="flex justify-between items-center px-margin-mobile h-16 w-full fixed top-0 z-50 bg-surface/70 backdrop-blur-md border-b border-outline-variant/30 hidden md:flex">
+<div class="flex items-center gap-stack-sm text-primary">
+<span class="material-symbols-outlined hover:bg-surface-container-high/50 transition-colors p-2 rounded-full cursor-pointer">menu</span>
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface">ShopPilot AI</h1>
+</div>
+<div class="flex items-center gap-stack-md">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant/50">
+<img alt="User profile avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYJegWI3noWxCmxRYeKzkt0VNk0qCkFbHxYL40MRUnwntzuCMWwuaQoKNF2MKLHrG7N1m8ILmmpc6E0nF0Lai5QQzzXb1Gl7T_BqM-kMI2IQLLWGTyMwGAxqbs7uniFy9rgcx6J-Mx63R1ZN9VbC233Q8-7JA7RZ7PyzsDu7vOUlvHqxwg2s3nHoVjxixypjMwMPQkXn0gy_t1v-EJYOkujEql_ElQOYGWllg_ohB5ZzczvGj8URe2c2bfFI2r-K2U27_6X86KRNs"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas (Background to show drawer over) -->
+<main class="flex-1 w-full h-full pt-16 px-margin-mobile md:px-margin-desktop overflow-y-auto">
+<div class="max-w-container-max-width mx-auto py-stack-lg">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg mb-stack-lg">Discover Products</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Mock Background Products to give context -->
+<div class="bg-surface-container-lowest rounded-xl p-stack-md shadow-[0_10px_15px_-3px_rgba(0,0,0,0.05)] border border-outline-variant/30">
+<div class="h-48 rounded-lg mb-stack-sm overflow-hidden bg-surface-container-highest">
+<img alt="Mock Product 1" class="w-full h-full object-cover" data-alt="A sleek, modern pair of wireless over-ear headphones resting on a minimalist white surface. The lighting is soft and high-key, creating a bright, optimistic light-mode aesthetic typical of a premium corporate tech catalog. Subtle shadows emphasize the smooth matte finish and premium build quality of the headphones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBse6tBUBF4kw4-LPWKtW8sO__TyWAxBm8cxd0QcmXXUr5tQ4UEo5VEbQvDQwCT-Zrm4OTmQGM7Mxw7Gfm0ct5K1lfnMI_JY9gNpDtQJlM1fjjb6XhaffAlfQ_6gM0myFFqdDl7quhhN9siZ16Htsnwb6YnzMho5DPkGDMUyBc_8T9HalfhF4QAhpcRJPoqmBCN-ThNJgofGAP6fHSYlHNuYRxEEnoqHDI2q2nt7uZhWh1gKCrOYYobO1TrdKvRxR6xGULjXXDBzk"/>
+</div>
+<h3 class="font-label-md text-label-md font-bold">Premium Wireless Headphones</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-unit">$299.00</p>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-stack-md shadow-[0_10px_15px_-3px_rgba(0,0,0,0.05)] border border-outline-variant/30">
+<div class="h-48 rounded-lg mb-stack-sm overflow-hidden bg-surface-container-highest">
+<img alt="Mock Product 2" class="w-full h-full object-cover" data-alt="A stylish, minimalist smart watch with a white silicone band displayed on a clean, light surface. The lighting is bright and even, highlighting the sleek digital display and modern metallic casing. The aesthetic is sophisticated corporate tech, clean and inviting, with a focus on smart lifestyle accessories." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFCgc6f8LGK_OAdyhl2ZtpM6Ru3xPlkbwCkXeTybg9n94dSTaMpdwHwXpJR91wOHN5p6SbJT1unLTbv1SO0s5j44bgGqyIqWOns7wJ4kVEnjwvbmHpK8AVpX_7IxC5poJwLcKF7jatYKnisLLkR1-znXcWhOVIjTmsnf10HkiYyTp4DwayqmiMgL5QyX8FQNHjwfXYBJcv3lrFasN48UhvNsG-pN17Rj1ULM0ncMFl_grFhGfNgnem9IdtlHlVdmXsokwTmeH_Hfw"/>
+</div>
+<h3 class="font-label-md text-label-md font-bold">Minimalist Smart Watch</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-unit">$199.00</p>
+</div>
+</div>
+<!-- Button to trigger drawer (for demo purposes) -->
+<button class="mt-stack-lg bg-primary text-on-primary font-label-md text-label-md py-stack-sm px-stack-md rounded-full shadow-lg hover:bg-surface-tint transition-colors" onclick="document.getElementById('cart-drawer-overlay').classList.remove('opacity-0', 'pointer-events-none'); document.getElementById('cart-drawer').classList.remove('translate-x-full'); document.getElementById('cart-drawer').classList.add('translate-x-0');">
+                Open Cart Drawer
+            </button>
+</div>
+</main>
+<!-- Bottom Nav Bar (From Shared Components - Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-40 flex justify-around items-center px-4 py-2 pb-safe bg-surface/80 backdrop-blur-xl border-t border-outline-variant/20 shadow-lg md:hidden rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors w-12 h-12" href="#">
+<span class="material-symbols-outlined">chat_bubble</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors w-12 h-12" href="#">
+<span class="material-symbols-outlined">search</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full w-12 h-12 scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors w-12 h-12" href="#">
+<span class="material-symbols-outlined">person</span>
+</a>
+</nav>
+<!-- Cart Drawer Overlay -->
+<!-- Default state is open for the design prompt, but included classes to toggle if needed -->
+<div class="fixed inset-0 bg-on-background/20 backdrop-blur-sm z-50 transition-opacity duration-300" id="cart-drawer-overlay">
+<!-- Cart Drawer Container -->
+<aside class="absolute top-0 right-0 h-full w-full md:w-[400px] bg-surface-container-lowest shadow-[0_10px_15px_-3px_rgba(0,0,0,0.1)] border-l border-outline-variant/30 flex flex-col transition-transform duration-300 transform translate-x-0" id="cart-drawer">
+<!-- Drawer Header -->
+<div class="flex items-center justify-between px-stack-md py-stack-sm border-b border-outline-variant/30 bg-surface/70 backdrop-blur-md">
+<div class="flex items-center gap-stack-sm">
+<span class="material-symbols-outlined text-primary">shopping_cart</span>
+<h2 class="font-headline-md text-headline-md-mobile font-bold text-on-surface">Your Cart</h2>
+<span class="bg-primary-container text-on-primary-container font-label-sm text-label-sm px-2 py-0.5 rounded-full ml-unit">2</span>
+</div>
+<button class="text-on-surface-variant hover:text-error transition-colors p-1 rounded-full hover:bg-surface-container-high/50" onclick="document.getElementById('cart-drawer-overlay').classList.add('opacity-0', 'pointer-events-none'); document.getElementById('cart-drawer').classList.remove('translate-x-0'); document.getElementById('cart-drawer').classList.add('translate-x-full');">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Cart Items List (Scrollable) -->
+<div class="flex-1 overflow-y-auto cart-scroll p-stack-md flex flex-col gap-stack-md bg-surface-container-low/50">
+<!-- Cart Item 1 -->
+<div class="flex gap-stack-md bg-surface-container-lowest p-stack-sm rounded-xl border border-outline-variant/30 shadow-sm relative group hover:shadow-[0_4px_6px_-1px_rgba(0,0,0,0.05)] transition-shadow">
+<!-- Delete Button (Revealed on hover on desktop, always visible on mobile if needed, keeping simple here) -->
+<button class="absolute -top-2 -right-2 bg-surface text-on-surface-variant hover:text-error hover:bg-error-container border border-outline-variant/30 rounded-full w-6 h-6 flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 transition-opacity z-10">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+<div class="w-20 h-20 rounded-lg overflow-hidden bg-surface-container-highest shrink-0">
+<img alt="Cart Item 1" class="w-full h-full object-cover" data-alt="A close-up shot of a single sleek, black wireless headphone ear cup resting against a light grey, clean background. The high-key lighting creates a soft, modern corporate aesthetic. The focus is sharp on the premium matte texture of the headphone, emphasizing high quality and minimalist design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCz8Za0WObeEDvNLyRffeVj0-pe7LHwzG3WTCd5FsjQ-DtiOGhua6aDqdf0zYf1kM4MJcY4OJjBxIg_jzEjoqWAMAffJGLRgWq01MFE327H5kfVhKuUCXNQKdmP4299iiPS3j3cXAfLCQjLwrW27ssWDnhaKGaR1sJVzZnEQ1X_gcHOlZUkC2OsxPJ5NI1o3yXp3cGNxjSNuDUtNxuBbqpYTLD6f-WU-f98xmRgr1zeKTx6xQty87swEEEtotHUu72W9vlTTlKwipo"/>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<h3 class="font-label-md text-label-md font-semibold text-on-surface line-clamp-2 leading-tight">Premium Wireless Headphones</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-unit">Midnight Black</p>
+</div>
+<div class="flex items-center justify-between mt-stack-sm">
+<span class="font-label-md text-label-md font-bold text-primary">$299.00</span>
+<!-- Quantity Control -->
+<div class="flex items-center bg-surface-container-high rounded-full border border-outline-variant/20 p-0.5">
+<button class="w-6 h-6 flex items-center justify-center rounded-full hover:bg-surface-container-highest text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[14px]">remove</span>
+</button>
+<span class="font-label-sm text-label-sm w-6 text-center font-medium">1</span>
+<button class="w-6 h-6 flex items-center justify-center rounded-full hover:bg-surface-container-highest text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[14px]">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Cart Item 2 -->
+<div class="flex gap-stack-md bg-surface-container-lowest p-stack-sm rounded-xl border border-outline-variant/30 shadow-sm relative group hover:shadow-[0_4px_6px_-1px_rgba(0,0,0,0.05)] transition-shadow">
+<button class="absolute -top-2 -right-2 bg-surface text-on-surface-variant hover:text-error hover:bg-error-container border border-outline-variant/30 rounded-full w-6 h-6 flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 transition-opacity z-10">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+<div class="w-20 h-20 rounded-lg overflow-hidden bg-surface-container-highest shrink-0">
+<img alt="Cart Item 2" class="w-full h-full object-cover" data-alt="A top-down view of a modern, minimalist smart watch face on a crisp white surface. The digital display is sleek and simple, illuminated softly in a light-mode setting. The corporate styling implies efficiency and premium lifestyle, with a focus on clean lines and clear interface elements." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDC1MJmW3EDI4obNAUHdXWAMz5-m_4bw_HRTAUPng0wcJKEFc3ljBHyL1bHVZV68P18km_00QzYnynMhj-18nSh4HjvABDE6sDhxp9l-FBCUJVEJ5tjLbFpJ4nuC6mKmMBO-4qjpR6Qx3V6Dxbh-egY4wxaCXfvl8Gsigx7qMQ2yAsESGI2pHaQXb7uc7v2klG7fV9neQEyM9oBf3b_PJS-OIfj2c_wCmFM-NT_j9iHA9cV9aAhZcdStrP3gVuvugLRHNY5e9IuNoM"/>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<h3 class="font-label-md text-label-md font-semibold text-on-surface line-clamp-2 leading-tight">Minimalist Smart Watch</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-unit">Silver / White</p>
+</div>
+<div class="flex items-center justify-between mt-stack-sm">
+<span class="font-label-md text-label-md font-bold text-primary">$199.00</span>
+<!-- Quantity Control -->
+<div class="flex items-center bg-surface-container-high rounded-full border border-outline-variant/20 p-0.5">
+<button class="w-6 h-6 flex items-center justify-center rounded-full hover:bg-surface-container-highest text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[14px]">remove</span>
+</button>
+<span class="font-label-sm text-label-sm w-6 text-center font-medium">1</span>
+<button class="w-6 h-6 flex items-center justify-center rounded-full hover:bg-surface-container-highest text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[14px]">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- AI Suggestion Bubble inside Cart -->
+<div class="mt-auto pt-stack-md pb-stack-sm">
+<div class="bg-primary/5 border border-primary/20 rounded-xl p-stack-sm flex items-start gap-stack-sm">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface">Customers who bought these also looked at protective cases.</p>
+<button class="font-label-sm text-label-sm text-primary font-bold mt-unit hover:underline">View suggestions</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Drawer Footer (Summary & Action) -->
+<div class="border-t border-outline-variant/30 bg-surface p-stack-md pb-[calc(16px+env(safe-area-inset-bottom))] md:pb-stack-md">
+<div class="flex justify-between items-center mb-stack-sm">
+<span class="font-body-md text-body-md text-on-surface-variant">Subtotal</span>
+<span class="font-headline-md text-headline-md-mobile font-bold text-on-surface">$498.00</span>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-stack-md">Shipping and taxes calculated at checkout.</p>
+<button class="w-full bg-gradient-to-r from-primary to-secondary-container text-on-primary font-label-md text-label-md py-3 rounded-xl shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-stack-sm">
+                    Confirm Order
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</aside>
+</div>
+</body></html>

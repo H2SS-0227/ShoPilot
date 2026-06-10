@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ShopPilot AI - Product Detail Sheet</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary-container": "#6063ee",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#301400",
+                        "inverse-primary": "#c0c1ff",
+                        "inverse-on-surface": "#f2effb",
+                        "background": "#fcf8ff",
+                        "tertiary-fixed": "#ffdcc5",
+                        "on-surface-variant": "#464554",
+                        "on-secondary-fixed": "#2c0051",
+                        "on-secondary-fixed-variant": "#6900b3",
+                        "on-primary-fixed-variant": "#2f2ebe",
+                        "surface-tint": "#494bd6",
+                        "on-tertiary-container": "#fffbff",
+                        "surface-container-highest": "#e4e1ed",
+                        "on-primary-container": "#fffbff",
+                        "tertiary-fixed-dim": "#ffb783",
+                        "surface": "#fcf8ff",
+                        "on-background": "#1b1b23",
+                        "surface-container": "#efecf8",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "primary": "#4648d4",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#9c48ea",
+                        "surface-container-high": "#e9e6f3",
+                        "secondary-fixed-dim": "#ddb7ff",
+                        "on-secondary-container": "#fffbff",
+                        "inverse-surface": "#303038",
+                        "secondary-fixed": "#f0dbff",
+                        "surface-variant": "#e4e1ed",
+                        "surface-container-low": "#f5f2fe",
+                        "tertiary": "#904900",
+                        "outline": "#767586",
+                        "primary-fixed-dim": "#c0c1ff",
+                        "surface-bright": "#fcf8ff",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#b55d00",
+                        "on-primary-fixed": "#07006c",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dbd8e4",
+                        "secondary": "#8127cf",
+                        "outline-variant": "#c7c4d7",
+                        "on-surface": "#1b1b23",
+                        "primary-fixed": "#e1e0ff",
+                        "on-tertiary-fixed-variant": "#703700",
+                        "error-container": "#ffdad6"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "margin-mobile": "16px",
+                        "stack-lg": "32px",
+                        "container-max-width": "1280px",
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "margin-desktop": "40px"
+                    },
+                    fontFamily: {
+                        "headline-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    fontSize: {
+                        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "700" }],
+                        "label-sm": ["12px", { lineHeight: "16px", fontWeight: "600" }],
+                        "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+                        "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                        "display-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "headline-lg-mobile": ["24px", { lineHeight: "32px", fontWeight: "700" }],
+                        "label-md": ["14px", { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "500" }],
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #4648d4 0%, #8127cf 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .ai-glass-panel {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(70, 72, 212, 0.05);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md antialiased overflow-hidden">
+<!-- Simulated Chat Background Context -->
+<div class="h-screen flex flex-col">
+<!-- TopAppBar (From JSON) -->
+<header class="flex justify-between items-center px-margin-mobile h-16 w-full fixed top-0 z-50 bg-surface/70 backdrop-blur-md border-b border-outline-variant/30">
+<div class="flex items-center gap-stack-sm text-primary">
+<span class="material-symbols-outlined hover:bg-surface-container-high/50 transition-colors rounded-full p-2" data-icon="menu">menu</span>
+</div>
+<div class="font-headline-md text-headline-md-mobile font-bold text-on-surface">
+                ShopPilot AI
+            </div>
+<div class="flex items-center gap-stack-sm">
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden border border-outline-variant/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">person</span>
+</div>
+</div>
+</header>
+<!-- Mock Chat Content (Blurred out by overlay) -->
+<main class="flex-1 pt-24 pb-32 px-margin-mobile flex flex-col gap-stack-md opacity-30">
+<div class="self-end bg-surface-variant text-on-surface p-4 rounded-t-2xl rounded-bl-2xl rounded-br-none max-w-[80%] shadow-sm">
+<p class="font-body-md text-body-md">Can you recommend a sleek, minimalist desk lamp for my new office setup?</p>
+</div>
+<div class="self-start flex gap-stack-sm max-w-[85%]">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center shrink-0 mt-1">
+<span class="material-symbols-outlined text-on-secondary-container text-sm" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div class="bg-surface text-on-surface p-4 rounded-t-2xl rounded-br-2xl rounded-bl-none shadow-sm border border-outline-variant/20">
+<p class="font-body-md text-body-md">Absolutely. Based on your preference for minimal design, I found a few excellent options that provide great task lighting without cluttering your desk. This first one is highly rated.</p>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (From JSON) - Dimmed -->
+<nav class="fixed bottom-0 left-0 w-full z-40 flex justify-around items-center px-4 py-2 pb-6 bg-surface/80 backdrop-blur-xl border-t border-outline-variant/20 shadow-lg opacity-30">
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full w-12 h-12 scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="chat_bubble" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+</nav>
+</div>
+<!-- Overlay Backdrop -->
+<div class="fixed inset-0 bg-on-background/40 backdrop-blur-[2px] z-50 transition-opacity"></div>
+<!-- Product Detail Bottom Sheet -->
+<div class="fixed bottom-0 left-0 right-0 w-full bg-surface z-[60] rounded-t-[32px] shadow-[0_-8px_40px_rgba(0,0,0,0.12)] flex flex-col max-h-[777px] transform transition-transform duration-300 ease-out translate-y-0">
+<!-- Drag Handle & Header -->
+<div class="w-full flex flex-col items-center pt-3 pb-2 px-margin-mobile shrink-0 bg-surface rounded-t-[32px]">
+<div class="w-12 h-1.5 bg-outline-variant/40 rounded-full mb-4"></div>
+<div class="w-full flex justify-between items-center">
+<button class="flex items-center gap-1 text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="keyboard_arrow_down">keyboard_arrow_down</span>
+                    Back to Chat
+                </button>
+<div class="flex gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="favorite_border">favorite_border</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto hide-scrollbar px-margin-mobile pb-32">
+<!-- Product Image Carousel/Hero -->
+<div class="w-full aspect-[4/3] rounded-2xl overflow-hidden mb-6 relative bg-surface-container-low shadow-sm border border-outline-variant/10">
+<img class="w-full h-full object-cover" data-alt="A high-end, cinematic lifestyle photograph of a sleek, minimalist matte black desk lamp resting on a clean, light wood surface. The lighting is soft and directional, highlighting the smooth geometric curves and premium aluminum finish of the lamp. The aesthetic is modern corporate with a touch of youthful sophistication, using a palette of neutral tones with crisp white highlights to evoke intelligent clarity and high-tech elegance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBXKsD60Ux5zbntPaZhfxt_IrqEHrFfj2QDr8WrRIgJ10eZEiNsNwP7uGrSMvftGrR-Qh6tChu_qWIqHMDMHXJqTzFaD9oD72dRIRgZAIZKIUM3GiJ_2Kvx1-PQwt6qAkUOTceQx7XrxxWaboWuH2NuSUw9ErCbBFWkWSmDDYr8FsmTPdUdyKEHJ9ssaVM6cwNu-otMkbnG9iIBeejaHKNjcICwYVJBZkZWGqw8GKN3Kulg4qYINlsU3OTnCLP4cFxddE1__6bHL8"/>
+<!-- Paging indicators -->
+<div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+<div class="w-2 h-2 rounded-full bg-surface"></div>
+<div class="w-2 h-2 rounded-full bg-surface/40"></div>
+<div class="w-2 h-2 rounded-full bg-surface/40"></div>
+</div>
+</div>
+<!-- Basic Info Section -->
+<div class="mb-6">
+<div class="flex justify-between items-start mb-2">
+<div>
+<p class="font-label-sm text-label-sm text-primary uppercase tracking-wider mb-1">Luminaire Co.</p>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Horizon Arch Task Lamp</h1>
+</div>
+<div class="text-right">
+<p class="font-headline-md text-headline-md text-on-surface">$129.00</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant flex items-center justify-end gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary-container" style="font-variation-settings: 'FILL' 1;">star</span>
+                            4.9 (128)
+                        </p>
+</div>
+</div>
+</div>
+<!-- AI Recommendation Banner (Glassmorphism Accent) -->
+<div class="mb-8 ai-glass-panel rounded-2xl p-4 relative overflow-hidden">
+<!-- Decorative gradient blob behind text -->
+<div class="absolute -top-10 -right-10 w-32 h-32 bg-secondary-container/20 rounded-full blur-2xl"></div>
+<div class="flex gap-3 relative z-10">
+<div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center shrink-0 shadow-md">
+<span class="material-symbols-outlined text-on-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-on-surface font-semibold mb-1">Why ShopPilot recommends this</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">
+                            Perfectly aligns with your request for a minimalist setup. It features adjustable color temperature which is great for reducing eye strain during long working sessions, a highly requested feature among remote workers.
+                        </p>
+</div>
+</div>
+</div>
+<!-- Configuration (SKU Selection) -->
+<div class="mb-8 space-y-6">
+<!-- Color Selection -->
+<div>
+<div class="flex justify-between items-center mb-3">
+<h4 class="font-label-md text-label-md text-on-surface">Color</h4>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Matte Black</span>
+</div>
+<div class="flex gap-4">
+<button class="w-10 h-10 rounded-full bg-[#2A2A2A] ring-2 ring-offset-2 ring-primary ring-offset-surface outline-none shadow-sm"></button>
+<button class="w-10 h-10 rounded-full bg-[#E5E5E5] border border-outline-variant/30 outline-none hover:ring-2 hover:ring-offset-2 hover:ring-outline-variant/50 hover:ring-offset-surface transition-all"></button>
+<button class="w-10 h-10 rounded-full bg-[#7C817D] border border-outline-variant/30 outline-none hover:ring-2 hover:ring-offset-2 hover:ring-outline-variant/50 hover:ring-offset-surface transition-all"></button>
+</div>
+</div>
+<!-- Size/Style Selection -->
+<div>
+<h4 class="font-label-md text-label-md text-on-surface mb-3">Base Style</h4>
+<div class="grid grid-cols-2 gap-3">
+<button class="py-3 px-4 rounded-xl border-2 border-primary bg-primary/5 text-primary font-label-md text-label-md text-center transition-colors">
+                            Freestanding
+                        </button>
+<button class="py-3 px-4 rounded-xl border border-outline-variant/40 text-on-surface-variant font-label-md text-label-md text-center hover:border-outline-variant hover:bg-surface-container-lowest transition-colors">
+                            Desk Clamp
+                        </button>
+</div>
+</div>
+</div>
+<!-- Detailed Description -->
+<div class="mb-8">
+<h4 class="font-label-md text-label-md text-on-surface mb-3">Product Details</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-3">
+                    The Horizon Arch is engineered for focused work environments. Its slim profile houses advanced LEDs that provide smooth, shadow-free illumination across your entire workspace.
+                </p>
+<ul class="space-y-2 mb-4 font-body-md text-body-md text-on-surface-variant">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary mt-0.5">check_circle</span>
+                        Dimmable from 10% to 100%
+                    </li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary mt-0.5">check_circle</span>
+                        Adjustable color temperature (2700K - 6500K)
+                    </li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary mt-0.5">check_circle</span>
+                        Built-in USB-C charging port
+                    </li>
+</ul>
+<button class="font-label-md text-label-md text-primary underline decoration-primary/30 underline-offset-4 hover:decoration-primary transition-colors">
+                    Read full specifications
+                </button>
+</div>
+</div>
+<!-- Sticky Bottom Action Area -->
+<div class="absolute bottom-0 left-0 w-full bg-surface/90 backdrop-blur-md border-t border-outline-variant/20 p-margin-mobile pb-safe flex gap-3 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] pt-4 pb-8">
+<button class="w-14 h-14 rounded-xl border border-outline-variant/40 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors shrink-0">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+</button>
+<button class="flex-1 h-14 rounded-full bg-gradient-to-r from-primary to-secondary text-on-primary font-label-md text-label-md font-semibold shadow-md hover:shadow-lg hover:scale-[0.98] transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]" data-icon="shopping_bag">shopping_bag</span>
+                Add to Cart - $129.00
+            </button>
+</div>
+</div>
+</body></html>

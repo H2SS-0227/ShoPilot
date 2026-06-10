@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ShopPilot AI - Empty State</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "primary-container": "#6063ee",
+                            "on-tertiary-fixed-variant": "#703700",
+                            "on-secondary": "#ffffff",
+                            "on-primary": "#ffffff",
+                            "on-error": "#ffffff",
+                            "outline-variant": "#c7c4d7",
+                            "surface-bright": "#fcf8ff",
+                            "surface-dim": "#dbd8e4",
+                            "inverse-primary": "#c0c1ff",
+                            "error-container": "#ffdad6",
+                            "outline": "#767586",
+                            "inverse-surface": "#303038",
+                            "surface-variant": "#e4e1ed",
+                            "on-secondary-container": "#fffbff",
+                            "tertiary": "#904900",
+                            "surface-tint": "#494bd6",
+                            "surface-container-high": "#e9e6f3",
+                            "on-background": "#1b1b23",
+                            "tertiary-fixed-dim": "#ffb783",
+                            "on-surface-variant": "#464554",
+                            "secondary": "#8127cf",
+                            "tertiary-container": "#b55d00",
+                            "surface-container": "#efecf8",
+                            "on-tertiary-container": "#fffbff",
+                            "on-primary-container": "#fffbff",
+                            "on-tertiary-fixed": "#301400",
+                            "inverse-on-surface": "#f2effb",
+                            "on-secondary-fixed": "#2c0051",
+                            "secondary-fixed": "#f0dbff",
+                            "secondary-container": "#9c48ea",
+                            "error": "#ba1a1a",
+                            "on-error-container": "#93000a",
+                            "primary-fixed": "#e1e0ff",
+                            "surface-container-low": "#f5f2fe",
+                            "surface-container-highest": "#e4e1ed",
+                            "on-primary-fixed-variant": "#2f2ebe",
+                            "surface": "#fcf8ff",
+                            "surface-container-lowest": "#ffffff",
+                            "on-tertiary": "#ffffff",
+                            "on-primary-fixed": "#07006c",
+                            "primary-fixed-dim": "#c0c1ff",
+                            "tertiary-fixed": "#ffdcc5",
+                            "background": "#fcf8ff",
+                            "primary": "#4648d4",
+                            "on-secondary-fixed-variant": "#6900b3",
+                            "on-surface": "#1b1b23",
+                            "secondary-fixed-dim": "#ddb7ff"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "0.25rem",
+                            "lg": "0.5rem",
+                            "xl": "0.75rem",
+                            "full": "9999px"
+                    },
+                    "spacing": {
+                            "margin-mobile": "16px",
+                            "unit": "4px",
+                            "stack-sm": "8px",
+                            "margin-desktop": "40px",
+                            "stack-lg": "32px",
+                            "gutter": "24px",
+                            "stack-md": "16px",
+                            "container-max-width": "1280px"
+                    },
+                    "fontFamily": {
+                            "body-md": ["Inter"],
+                            "headline-md": ["Inter"],
+                            "headline-lg": ["Inter"],
+                            "headline-lg-mobile": ["Inter"],
+                            "body-lg": ["Inter"],
+                            "display-lg": ["Inter"],
+                            "label-sm": ["Inter"],
+                            "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                            "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                            "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                            "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                            "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                            "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                            "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                            "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .ai-gradient-text {
+            background: linear-gradient(135deg, #4648d4 0%, #8127cf 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        @keyframes subtle-float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .float-animation {
+            animation: subtle-float 6s ease-in-out infinite;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col antialiased">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center px-margin-mobile h-16 w-full fixed top-0 z-50 bg-surface/70 backdrop-blur-md border-b border-outline-variant/30">
+<div class="flex items-center gap-stack-sm">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high/50 transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">menu</span>
+</button>
+<h1 class="font-headline-md text-headline-md-mobile md:text-headline-md font-bold text-on-surface">ShopPilot AI</h1>
+</div>
+<div class="flex items-center gap-stack-sm">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-variant overflow-hidden hover:bg-surface-container-high/50 transition-colors">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="A close up portrait of a young professional woman with natural makeup, looking directly at the camera with a subtle smile. The lighting is soft and bright, highlighting her features. The background is a clean, out-of-focus studio setting, perfectly fitting a modern, sleek corporate application profile picture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDb2Tided_OkPtY6HpwFzE4zgoGLYiVgxCkFvphFBJldzpJhLW0nFPNBG0awLPJLwRnRqcv0uVfp4MV2sCZXEh-xqWHlzy2THv5qcFR2xx6cmy59ptfsW0D5V9p3dtgT_U9lNty1UBV0uuz1WuflMZWx2BhcIwcSZ5IaNgECUGjSoBC4M0dL1ygl9U0t4dyqJbEjG_ZyGB247HbKtwjNo1s1VhFffesa06VtHQ_Ijve8pRAQ3vG_UK-MXqTM-BShJ_DWSj__QIioDU"/>
+</button>
+</div>
+</header>
+<!-- Main Content Area (ChatScreen Empty State) -->
+<main class="flex-1 flex flex-col items-center justify-center pt-24 pb-32 px-margin-mobile md:px-margin-desktop w-full max-w-container-max-width mx-auto relative overflow-hidden">
+<!-- Decorative Background Element -->
+<div class="absolute inset-0 z-0 flex items-center justify-center pointer-events-none opacity-20">
+<div class="w-96 h-96 bg-primary rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+<div class="w-96 h-96 bg-secondary rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse" style="animation-delay: 2s;"></div>
+</div>
+<!-- Empty State Content -->
+<div class="relative z-10 w-full max-w-3xl flex flex-col items-center text-center mt-[-10vh]">
+<!-- Brand Logo / Mascot -->
+<div class="w-24 h-24 mb-stack-lg float-animation relative">
+<div class="absolute inset-0 bg-primary-container rounded-full blur-xl opacity-50"></div>
+<div class="w-full h-full bg-white rounded-full shadow-lg border border-outline-variant/30 flex items-center justify-center relative z-10">
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+</div>
+<!-- Welcome Text -->
+<h2 class="font-display-lg text-display-lg mb-stack-sm ai-gradient-text">Hello, I'm ShopPilot.</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mx-auto mb-stack-lg">
+                Your personal AI shopping assistant. What are we looking for today?
+            </p>
+<!-- QuickPromptCards (Bento Grid Style) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md w-full mt-stack-lg">
+<!-- Card 1 -->
+<button class="glass-panel rounded-xl p-stack-md text-left transition-all duration-300 hover:-translate-y-1 hover:shadow-xl group">
+<div class="flex items-center gap-stack-sm mb-stack-sm text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">headphones</span>
+<span class="font-label-md text-label-md">Tech &amp; Gadgets</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface font-medium mb-unit">帮我选一款性价比耳机</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant line-clamp-1">适合通勤降噪，预算1000元以内。</p>
+</button>
+<!-- Card 2 -->
+<button class="glass-panel rounded-xl p-stack-md text-left transition-all duration-300 hover:-translate-y-1 hover:shadow-xl group">
+<div class="flex items-center gap-stack-sm mb-stack-sm text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">featured_seasonal_and_gifts</span>
+<span class="font-label-md text-label-md">Gifts &amp; Beauty</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface font-medium mb-unit">适合送礼的香水</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant line-clamp-1">送给25岁女性朋友的生日礼物。</p>
+</button>
+<!-- Card 3 -->
+<button class="glass-panel rounded-xl p-stack-md text-left transition-all duration-300 hover:-translate-y-1 hover:shadow-xl group hidden md:block">
+<div class="flex items-center gap-stack-sm mb-stack-sm text-tertiary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">checkroom</span>
+<span class="font-label-md text-label-md">Fashion &amp; Apparel</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface font-medium mb-unit">推荐几款男士风衣</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant line-clamp-1">适合秋季穿着，简约英伦风。</p>
+</button>
+<!-- Card 4 -->
+<button class="glass-panel rounded-xl p-stack-md text-left transition-all duration-300 hover:-translate-y-1 hover:shadow-xl group hidden md:block">
+<div class="flex items-center gap-stack-sm mb-stack-sm text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">home_iot_device</span>
+<span class="font-label-md text-label-md">Home &amp; Living</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface font-medium mb-unit">提升卧室氛围的好物</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant line-clamp-1">香薰灯、氛围灯或柔软床品推荐。</p>
+</button>
+</div>
+</div>
+</main>
+<!-- Chat Input Area (Fixed Bottom) -->
+<div class="fixed bottom-0 left-0 w-full z-40 px-margin-mobile md:px-margin-desktop pb-24 md:pb-stack-lg pt-stack-md bg-gradient-to-t from-background via-background/90 to-transparent pointer-events-none">
+<div class="max-w-3xl mx-auto w-full pointer-events-auto">
+<div class="glass-panel rounded-full shadow-lg p-unit flex items-center gap-stack-sm border border-outline-variant/50">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">add_photo_alternate</span>
+</button>
+<input class="flex-1 bg-transparent border-none focus:ring-0 font-body-md text-body-md text-on-surface placeholder-on-surface-variant px-unit" placeholder="Ask me anything..." type="text"/>
+<button class="w-10 h-10 rounded-full bg-gradient-to-r from-primary to-secondary text-on-primary flex items-center justify-center shadow-md hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_upward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe bg-surface/80 backdrop-blur-xl border-t border-outline-variant/20 shadow-lg md:hidden">
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full w-12 h-12 scale-90 duration-150">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">chat_bubble</span>
+<span class="font-label-sm text-label-sm mt-1 hidden">Chat</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">search</span>
+<span class="font-label-sm text-label-sm mt-1 hidden">Search</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">shopping_cart</span>
+<span class="font-label-sm text-label-sm mt-1 hidden">Cart</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">person</span>
+<span class="font-label-sm text-label-sm mt-1 hidden">Profile</span>
+</button>
+</nav>
+</body></html>

@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node / Expo
+node_modules/
+.expo/
+dist/
+dist-plan-check/
+build/
+web-build/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+.mcp/*.json
+!.mcp/*.example.json
+.stitch/.env
+
+# Generated data and indexes
+server/data/normalized/*.json
+server/data/indexes/*
+!server/data/indexes/.gitkeep
+!server/data/normalized/.gitkeep
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Swift Package Manager
+.build/
+.swiftpm/
