@@ -147,55 +147,60 @@ struct TopAppBar: View {
     let onCart: () -> Void
 
     var body: some View {
-        HStack {
-            Button(action: onMenu) {
-                Image(systemName: "line.3.horizontal")
-                    .font(.system(size: 18, weight: .semibold))
-                    .foregroundStyle(ShopColors.primary)
-                    .frame(width: 40, height: 40)
-            }
-            .buttonStyle(.plain)
+        VStack(spacing: 0) {
+            Spacer(minLength: 0)
 
-            Spacer()
-
-            HStack(spacing: 7) {
-                Text("ShopPilot AI")
-                    .font(.system(size: 18, weight: .bold))
-                    .foregroundStyle(ShopColors.onSurface)
-                if showOnlineDot {
-                    Circle()
-                        .fill(Color(hex: 0x22C55E))
-                        .frame(width: 7, height: 7)
-                        .shadow(color: Color(hex: 0x22C55E).opacity(0.5), radius: 6)
+            HStack {
+                Button(action: onMenu) {
+                    Image(systemName: "line.3.horizontal")
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundStyle(ShopColors.primary)
+                        .frame(width: 40, height: 40)
                 }
-            }
+                .buttonStyle(.plain)
 
-            Spacer()
+                Spacer()
 
-            Button(action: onCart) {
-                ZStack(alignment: .topTrailing) {
-                    Circle()
-                        .fill(ShopColors.surfaceHigh)
-                        .frame(width: 36, height: 36)
-                    Image(systemName: cartCount > 0 ? "cart.fill" : "person.crop.circle")
-                        .font(.system(size: 17, weight: .semibold))
-                        .foregroundStyle(cartCount > 0 ? ShopColors.primary : ShopColors.onSurfaceVariant)
-                        .frame(width: 36, height: 36)
-                    if cartCount > 0 {
-                        Text("\(cartCount)")
-                            .font(.system(size: 9, weight: .heavy))
-                            .foregroundStyle(.white)
-                            .frame(width: 16, height: 16)
-                            .background(ShopColors.secondaryContainer)
-                            .clipShape(Circle())
-                            .offset(x: 3, y: -4)
+                HStack(spacing: 7) {
+                    Text("ShopPilot AI")
+                        .font(.system(size: 18, weight: .bold))
+                        .foregroundStyle(ShopColors.onSurface)
+                    if showOnlineDot {
+                        Circle()
+                            .fill(Color(hex: 0x22C55E))
+                            .frame(width: 7, height: 7)
+                            .shadow(color: Color(hex: 0x22C55E).opacity(0.5), radius: 6)
                     }
                 }
+
+                Spacer()
+
+                Button(action: onCart) {
+                    ZStack(alignment: .topTrailing) {
+                        Circle()
+                            .fill(ShopColors.surfaceHigh)
+                            .frame(width: 36, height: 36)
+                        Image(systemName: cartCount > 0 ? "cart.fill" : "person.crop.circle")
+                            .font(.system(size: 17, weight: .semibold))
+                            .foregroundStyle(cartCount > 0 ? ShopColors.primary : ShopColors.onSurfaceVariant)
+                            .frame(width: 36, height: 36)
+                        if cartCount > 0 {
+                            Text("\(cartCount)")
+                                .font(.system(size: 9, weight: .heavy))
+                                .foregroundStyle(.white)
+                                .frame(width: 16, height: 16)
+                                .background(ShopColors.secondaryContainer)
+                                .clipShape(Circle())
+                                .offset(x: 3, y: -4)
+                        }
+                    }
+                }
+                .buttonStyle(.plain)
             }
-            .buttonStyle(.plain)
+            .padding(.horizontal, 14)
+            .frame(height: 50)
         }
-        .padding(.horizontal, 14)
-        .frame(height: 64)
+        .frame(height: 88)
         .background(.ultraThinMaterial.opacity(0.72))
         .overlay(alignment: .bottom) {
             Rectangle()
@@ -230,7 +235,7 @@ struct HomeCanvas: View {
                         .fill(Color.white.opacity(0.76))
                         .frame(width: 72, height: 72)
                         .shadow(color: ShopColors.primary.opacity(0.22), radius: 22, y: 10)
-                    Image(systemName: "robot")
+                    Image(systemName: "sparkles")
                         .font(.system(size: 28, weight: .bold))
                         .foregroundStyle(ShopColors.primary)
                 }
@@ -415,7 +420,7 @@ struct AssistantAvatar: View {
             Circle()
                 .fill(LinearGradient(colors: [ShopColors.primary, ShopColors.secondaryContainer], startPoint: .topLeading, endPoint: .bottomTrailing))
                 .frame(width: 34, height: 34)
-            Image(systemName: "robot")
+            Image(systemName: "sparkles")
                 .font(.system(size: 15, weight: .bold))
                 .foregroundStyle(.white)
         }
