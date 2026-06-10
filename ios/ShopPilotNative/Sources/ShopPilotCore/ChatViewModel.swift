@@ -73,6 +73,16 @@ public final class ChatViewModel: ObservableObject {
         isStreaming = false
     }
 
+    public func reset() {
+        streamTask?.cancel()
+        streamTask = nil
+        messages = []
+        lastProducts = []
+        errorMessage = nil
+        isStreaming = false
+        inputText = "推荐一款 200 元以内的咖啡，并给我参考真实测评链接"
+    }
+
     private func appendDelta(_ text: String, to assistantId: UUID) {
         guard let index = messages.firstIndex(where: { $0.id == assistantId }) else { return }
         if messages[index].text == "正在理解需求并检索商品库..." {

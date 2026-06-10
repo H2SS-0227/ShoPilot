@@ -18,6 +18,8 @@ struct ChatScreen: View {
     @State private var selectedProduct: Product?
     @State private var compareOpen = false
     @State private var cartOpen = false
+    @State private var searchOpen = false
+    @State private var profileOpen = false
     @State private var cart: [Product] = []
     @State private var selectedTab: BottomTab = .chat
 
@@ -34,15 +36,29 @@ struct ChatScreen: View {
                 )
 
                 if viewModel.messages.isEmpty {
-                    HomeCanvas(inputText: $viewModel.inputText, onSend: { viewModel.send() }, onPrompt: viewModel.send)
+                    HomeCanvas(
+                        inputText: $viewModel.inputText,
+                        selectedTab: $selectedTab,
+                        cartCount: cart.count,
+                        onSend: { viewModel.send() },
+                        onPrompt: viewModel.send,
+                        onHome: { viewModel.reset() },
+                        onSearch: { searchOpen = true },
+                        onCart: { cartOpen = true },
+                        onProfile: { profileOpen = true }
+                    )
                 } else {
                     ChatCanvas(
                         viewModel: viewModel,
                         selectedTab: $selectedTab,
+                        cartCount: cart.count,
                         onOpenProduct: { selectedProduct = $0 },
                         onAddProduct: addToCart,
                         onCompare: { compareOpen = true },
-                        onCart: { cartOpen = true }
+                        onHome: { viewModel.reset() },
+                        onSearch: { searchOpen = true },
+                        onCart: { cartOpen = true },
+                        onProfile: { profileOpen = true }
                     )
                 }
             }
@@ -64,6 +80,20 @@ struct ChatScreen: View {
             })
             .presentationDetents([.large])
             .presentationDragIndicator(.hidden)
+        }
+        .sheet(isPresented: $searchOpen) {
+            QuickSearchSheet { query in
+                searchOpen = false
+                selectedTab = .chat
+                viewModel.send(query)
+            }
+            .presentationDetents([.medium])
+            .presentationDragIndicator(.visible)
+        }
+        .sheet(isPresented: $profileOpen) {
+            ProfileSheet()
+                .presentationDetents([.height(360)])
+                .presentationDragIndicator(.visible)
         }
     }
 
@@ -212,8 +242,14 @@ struct TopAppBar: View {
 
 struct HomeCanvas: View {
     @Binding var inputText: String
+    @Binding var selectedTab: BottomTab
+    let cartCount: Int
     let onSend: () -> Void
     let onPrompt: (String) -> Void
+    let onHome: () -> Void
+    let onSearch: () -> Void
+    let onCart: () -> Void
+    let onProfile: () -> Void
 
     private let prompts: [(String, String, String)] = [
         ("headphones", "帮我选一款高性价比耳机", "headphones"),
@@ -276,7 +312,14 @@ struct HomeCanvas: View {
             Spacer(minLength: 84)
         }
         .safeAreaInset(edge: .bottom) {
-            BottomTabBar(selectedTab: .constant(.chat), cartCount: 0, onCart: {})
+            BottomTabBar(
+                selectedTab: $selectedTab,
+                cartCount: cartCount,
+                onHome: onHome,
+                onSearch: onSearch,
+                onCart: onCart,
+                onProfile: onProfile
+            )
         }
     }
 }
@@ -321,10 +364,14 @@ struct HomePromptCard: View {
 struct ChatCanvas: View {
     @ObservedObject var viewModel: ChatViewModel
     @Binding var selectedTab: BottomTab
+    let cartCount: Int
     let onOpenProduct: (Product) -> Void
     let onAddProduct: (Product) -> Void
     let onCompare: () -> Void
+    let onHome: () -> Void
+    let onSearch: () -> Void
     let onCart: () -> Void
+    let onProfile: () -> Void
 
     var body: some View {
         VStack(spacing: 0) {
@@ -370,7 +417,14 @@ struct ChatCanvas: View {
             )
         }
         .safeAreaInset(edge: .bottom) {
-            BottomTabBar(selectedTab: $selectedTab, cartCount: viewModel.lastProducts.count, onCart: onCart)
+            BottomTabBar(
+                selectedTab: $selectedTab,
+                cartCount: cartCount,
+                onHome: onHome,
+                onSearch: onSearch,
+                onCart: onCart,
+                onProfile: onProfile
+            )
         }
     }
 }
@@ -694,14 +748,28 @@ struct ChatInputDock: View {
 struct BottomTabBar: View {
     @Binding var selectedTab: BottomTab
     let cartCount: Int
+    let onHome: () -> Void
+    let onSearch: () -> Void
     let onCart: () -> Void
+    let onProfile: () -> Void
 
     var body: some View {
         HStack(spacing: 0) {
             ForEach([BottomTab.home, .search, .chat, .cart, .profile], id: \.self) { tab in
                 Button {
                     selectedTab = tab
-                    if tab == .cart { onCart() }
+                    switch tab {
+                    case .home:
+                        onHome()
+                    case .search:
+                        onSearch()
+                    case .chat:
+                        break
+                    case .cart:
+                        onCart()
+                    case .profile:
+                        onProfile()
+                    }
                 } label: {
                     VStack(spacing: 3) {
                         ZStack(alignment: .topTrailing) {
@@ -962,7 +1030,14 @@ struct CompareSheet: View {
                     .padding(.bottom, 96)
                 }
 
-                BottomTabBar(selectedTab: .constant(.search), cartCount: 0, onCart: {})
+                BottomTabBar(
+                    selectedTab: .constant(.search),
+                    cartCount: 0,
+                    onHome: { dismiss() },
+                    onSearch: {},
+                    onCart: {},
+                    onProfile: {}
+                )
             }
         }
     }
@@ -1194,6 +1269,115 @@ struct ErrorBanner: View {
             .background(Color(hex: 0xFFDAD6))
             .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
             .padding(.horizontal, 12)
+    }
+}
+
+struct QuickSearchSheet: View {
+    let onSelect: (String) -> Void
+
+    private let queries = [
+        "帮我找 200 元以内的咖啡，最好有真实测评链接",
+        "推荐适合油皮的防晒",
+        "帮我找一支日常通勤唇釉",
+        "推荐一双适合通勤的跑步鞋",
+        "推荐一款降噪耳机并说明差异"
+    ]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("快捷搜索")
+                .font(.system(size: 24, weight: .heavy))
+                .foregroundStyle(ShopColors.onSurface)
+            Text("选择一个常见需求，会直接调用后端 RAG + SSE 流式接口并加载商品卡片。")
+                .font(.system(size: 13, weight: .medium))
+                .foregroundStyle(ShopColors.onSurfaceVariant)
+
+            ForEach(queries, id: \.self) { query in
+                Button {
+                    onSelect(query)
+                } label: {
+                    HStack(spacing: 12) {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundStyle(ShopColors.primary)
+                            .frame(width: 32, height: 32)
+                            .background(ShopColors.primary.opacity(0.09))
+                            .clipShape(Circle())
+                        Text(query)
+                            .font(.system(size: 14, weight: .bold))
+                            .foregroundStyle(ShopColors.onSurface)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        Image(systemName: "arrow.right")
+                            .font(.system(size: 12, weight: .bold))
+                            .foregroundStyle(ShopColors.onSurfaceVariant)
+                    }
+                    .padding(12)
+                    .background(Color.white)
+                    .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                    .overlay(RoundedRectangle(cornerRadius: 16).stroke(ShopColors.outlineVariant.opacity(0.26), lineWidth: 1))
+                }
+                .buttonStyle(.plain)
+            }
+        }
+        .padding(18)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .background(ShopColors.background)
+    }
+}
+
+struct ProfileSheet: View {
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            HStack(spacing: 12) {
+                Image(systemName: "person.crop.circle.fill")
+                    .font(.system(size: 42))
+                    .foregroundStyle(ShopColors.primary)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("ShopPilot Demo")
+                        .font(.system(size: 20, weight: .heavy))
+                    Text("本地后端：127.0.0.1:8000")
+                        .font(.system(size: 12, weight: .semibold))
+                        .foregroundStyle(ShopColors.onSurfaceVariant)
+                }
+            }
+
+            VStack(alignment: .leading, spacing: 10) {
+                StatusRow(icon: "checkmark.seal.fill", title: "商品库", value: "ecommerce_agent_dataset 已接入")
+                StatusRow(icon: "dot.radiowaves.left.and.right", title: "流式协议", value: "SSE meta / delta / final / done")
+                StatusRow(icon: "photo.fill", title: "商品图片", value: "/assets/products 静态加载")
+            }
+
+            Text("如果真机调试，请把 API 地址从 127.0.0.1 改成 Mac 的局域网 IP；模拟器可直接访问 127.0.0.1。")
+                .font(.system(size: 12, weight: .medium))
+                .foregroundStyle(ShopColors.onSurfaceVariant)
+                .lineSpacing(3)
+        }
+        .padding(18)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .background(ShopColors.background)
+    }
+}
+
+struct StatusRow: View {
+    let icon: String
+    let title: String
+    let value: String
+
+    var body: some View {
+        HStack(spacing: 10) {
+            Image(systemName: icon)
+                .foregroundStyle(ShopColors.primary)
+                .frame(width: 28, height: 28)
+            Text(title)
+                .font(.system(size: 13, weight: .heavy))
+                .frame(width: 76, alignment: .leading)
+            Text(value)
+                .font(.system(size: 12, weight: .semibold))
+                .foregroundStyle(ShopColors.onSurfaceVariant)
+            Spacer()
+        }
+        .padding(12)
+        .background(Color.white)
+        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
     }
 }
 
